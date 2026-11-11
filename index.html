@@ -150,7 +150,8 @@ a{color:inherit}.btn{text-decoration:none;display:flex;align-items:center;justif
 .prog i.on{background:var(--green)}
 .step{display:none;animation:pop .35s ease}
 .step.on{display:block}
-@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0}to{opacity:1}}
+.steps-box{min-height:450px}
 .q{font-size:27px;font-weight:900;letter-spacing:-.04em;line-height:1.25}
 .q small{display:block;font-size:16px;font-weight:700;color:#666;letter-spacing:0;margin-top:6px}
 .inp{width:100%;margin-top:18px;font:inherit;font-size:22px;font-weight:700;padding:16px 18px;border:4px solid var(--ink);border-radius:18px;background:var(--cream);outline:none}
@@ -239,7 +240,7 @@ footer b{color:var(--ink)}
     <div class="grid">
       <div class="card c1"><span class="chip k">언제</span><div class="v">12월 24일<br>(목)<small>저녁 6시 ~ 9시</small></div></div>
       <div class="card c2"><span class="chip k">어디서</span><div class="v">역삼<br>MARU180<small>지하 1층</small></div></div>
-      <div class="card c3"><span class="chip k">누가</span><div class="v">경계선지능<br>청년<small>혼자 와도 괜찮아요</small></div></div>
+      <div class="card c3"><span class="chip k">누가</span><div class="v">경계선지능<br>청년만!<small>혼자 와도 괜찮아요</small></div></div>
       <div class="card c4"><span class="chip k">참가비</span><div class="v">5,000원<small>저녁밥 포함!</small></div></div>
     </div>
   </section>
@@ -304,7 +305,7 @@ footer b{color:var(--ink)}
     <details><summary>참가비는 어떻게 내요?</summary><p>신청을 다 하면 계좌번호가 나와요. 5,000원을 보내면 신청 끝! 이름으로 보내 주세요.</p></details>
     <details><summary>못 가게 되면요?</summary><p>12월 21일(월)까지 문자로 알려 주면 5,000원을 돌려 드려요.</p></details>
     <details><summary>친구랑 같이 가도 돼요?</summary><p>그럼요! 친구도 이 페이지에서 따로 신청해 주세요.</p></details>
-    <details><summary>보호자나 선생님이 같이 가도 돼요?</summary><p>네, 괜찮아요. 신청할 때 "선생님·보호자랑 와요"를 골라 주세요.</p></details>
+    <details><summary>부모님이랑 같이 가도 돼요?</summary><p>이 파티는 <b>청년만</b> 참여할 수 있어요. 부모님은 같이 들어올 수 없어요. 건물 입구까지 데려다주고, 끝날 때 데리러 오는 건 괜찮아요.</p></details>
   </section>
 
   <!-- APPLY -->
@@ -313,6 +314,7 @@ footer b{color:var(--ink)}
     <h2>🎁 파티 신청서</h2>
     <form class="apply sticker" id="form" novalidate onsubmit="return false">
       <div class="prog" id="prog"></div>
+      <div class="steps-box">
 
       <div class="step" data-k="name">
         <p class="q">이름이 뭐예요?<small>이름표에 이 이름을 써요</small></p>
@@ -331,11 +333,11 @@ footer b{color:var(--ink)}
 
       <div class="step" data-k="from" data-type="one">
         <p class="q">어디서 알게 됐어요?</p>
-        <div class="opts">
+        <div class="opts two">
           <button type="button" class="opt" data-v="노원 유센터"><span class="e">🏫</span>노원 유센터</button>
           <button type="button" class="opt" data-v="밈센터"><span class="e">🏢</span>밈센터</button>
-          <button type="button" class="opt" data-v="선생님 소개"><span class="e">👩‍🏫</span>선생님이 알려줬어요</button>
-          <button type="button" class="opt" data-v="친구·가족"><span class="e">👫</span>친구·가족이 알려줬어요</button>
+          <button type="button" class="opt" data-v="선생님 소개"><span class="e">👩‍🏫</span>선생님 소개</button>
+          <button type="button" class="opt" data-v="친구·가족"><span class="e">👫</span>친구·가족</button>
           <button type="button" class="opt" data-v="인스타·유튜브"><span class="e">📱</span>인스타·유튜브</button>
           <button type="button" class="opt" data-v="기타"><span class="e">✏️</span>그 밖에</button>
         </div>
@@ -346,7 +348,6 @@ footer b{color:var(--ink)}
         <div class="opts">
           <button type="button" class="opt" data-v="혼자"><span class="e">🙋</span>혼자 와요</button>
           <button type="button" class="opt" data-v="친구랑"><span class="e">👯</span>친구랑 같이 와요<br></button>
-          <button type="button" class="opt" data-v="선생님·보호자랑"><span class="e">🧑‍🤝‍🧑</span>선생님·보호자랑 와요</button>
         </div>
         <p class="note">친구도 따로 신청해 주세요!</p>
       </div>
@@ -385,12 +386,16 @@ footer b{color:var(--ink)}
         <textarea class="inp" name="help" placeholder="예) 시끄러운 곳이 힘들어요&#10;예) 역에서 길 찾는 게 어려워요" maxlength="300"></textarea>
       </div>
 
-      <div class="step" data-k="photo" data-type="one">
-        <p class="q">사진에 얼굴이 나와도 괜찮아요?<small>파티 사진은 기록과 소식 알림에 써요</small></p>
-        <div class="opts">
-          <button type="button" class="opt" data-v="얼굴 나와도 OK"><span class="e">😄</span>네, 괜찮아요</button>
-          <button type="button" class="opt" data-v="얼굴은 빼 주세요"><span class="e">🙈</span>얼굴은 빼 주세요</button>
+      <div class="step" data-k="photo">
+        <p class="q">사진·영상 촬영에 동의해 주세요 📸<small>파티 모습을 사진과 영상으로 남겨요</small></p>
+        <div class="agree" style="font-size:15px">
+          <b>사진·영상은 이렇게 써요</b><br>
+          · 찍는 것: 파티 중 사진과 영상 (얼굴이 나올 수 있어요)<br>
+          · 쓰는 곳: 슬로코치·노원 유센터의 SNS, 홈페이지, 활동 보고서, 홍보물<br>
+          · 기간: 동의를 그만두고 싶다고 말할 때까지<br>
+          · 그만두고 싶으면 언제든 문자로 말해 주세요. 그때부터 새로 쓰지 않고, 올린 글에서도 내려요.
         </div>
+        <label class="check"><input type="checkbox" name="photoOk"> 네, 사진·영상 촬영과 사용에 동의해요</label>
       </div>
 
       <div class="step" data-k="agree">
@@ -406,6 +411,7 @@ footer b{color:var(--ink)}
         <label class="check"><input type="checkbox" name="agree"> 네, 동의해요</label>
       </div>
 
+      </div>
       <p class="err" id="err" role="alert"></p>
       <div class="nav">
         <button type="button" class="back" id="back">← 이전</button>
@@ -512,7 +518,7 @@ function show(i){steps.forEach((s,j)=>s.classList.toggle("on",j===i));[...prog.c
   document.getElementById("back").style.visibility=i?"visible":"hidden";
   document.getElementById("next").textContent=i===steps.length-1?"🎁 신청하기":"다음 →"; err.textContent="";
   if(steps[i].dataset.k==="agree")renderSummary();
-  const f=steps[i].querySelector("input.inp,textarea.inp"); if(f&&i>0&&f.offsetParent)setTimeout(()=>f.focus({preventScroll:true}),50);}
+  const f=steps[i].querySelector("input.inp,textarea.inp"); }
 document.querySelectorAll(".step[data-type]").forEach(st=>{const many=st.dataset.type==="many";
   st.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ if(!many)st.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel")); b.classList.toggle("sel");
     if(st.dataset.k==="food"){const t=form.foodText;t.style.display=b.dataset.v==="있어요"&&b.classList.contains("sel")?"block":"none";}
@@ -523,14 +529,15 @@ function check(k){
   if(k==="name"&&form.uname.value.trim().length<2)return"이름을 써 주세요 🙂";
   if(k==="birth"){const y=+form.birth.value;if(!(y>=1970&&y<=2012))return"태어난 해를 숫자 4개로 써 주세요 (예: 2001)";}
   if(k==="phone"&&!/^01\d-?\d{3,4}-?\d{4}$/.test(form.phone.value))return"휴대폰 번호를 다시 확인해 주세요";
-  if(["from","with","photo","food"].includes(k)&&!sel(k).length)return"하나를 골라 주세요 👆";
+  if(k==="photo"&&!form.photoOk.checked)return"사진·영상 동의에 체크해 주세요 📸";
+  if(["from","with","food"].includes(k)&&!sel(k).length)return"하나를 골라 주세요 👆";
   if(k==="food"&&sel(k)[0]==="있어요"&&!form.foodText.value.trim())return"못 먹는 음식을 써 주세요";
   if(k==="wish"&&!sel(k).length&&!form.wishText.value.trim())return"하고 싶은 걸 하나 이상 골라 주세요 ✨";
   if(k==="agree"&&!form.agree.checked)return"동의에 체크해 주세요 ✅";
   return"";}
 function collect(){return{name:form.uname.value.trim(),birth:form.birth.value.trim(),phone:form.phone.value.trim(),from:sel("from").join(", "),with:sel("with").join(", "),
   wish:sel("wish").join(", "),wishText:form.wishText.value.trim(),likes:form.likes.value.trim(),food:sel("food")[0]==="있어요"?form.foodText.value.trim():"없음",
-  help:form.help.value.trim(),photo:sel("photo").join(", "),agree:"동의",ua:navigator.userAgent.slice(0,120)};}
+  help:form.help.value.trim(),photo:form.photoOk.checked?"동의":"미동의",agree:"동의",ua:navigator.userAgent.slice(0,120)};}
 function renderSummary(){const d=collect();document.getElementById("summary").innerHTML=
   [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish,d.wishText].filter(Boolean).join(" / ")]].map(([a,b])=>`<div>✔ ${a}: <b>${(b||"-").replace(/</g,"&lt;")}</b></div>`).join("");}
 async function submit(){const d=collect();const btn=document.getElementById("next");btn.disabled=true;btn.textContent="보내는 중… 🎁";
@@ -545,7 +552,7 @@ async function submit(){const d=collect();const btn=document.getElementById("nex
   }catch(e){err.textContent="앗, 전송이 안 됐어요. 인터넷을 확인하고 다시 눌러 주세요.";btn.disabled=false;btn.textContent="🎁 신청하기";}}
 function go(dir){ if(dir>0){const m=check(steps[cur].dataset.k);if(m){err.textContent=m;return;} if(cur===steps.length-1)return submit();}
   cur=Math.max(0,Math.min(steps.length-1,cur+dir));show(cur);
-  const r=form.getBoundingClientRect(); if(r.top<0||r.top>innerHeight*.4) document.getElementById("apply").scrollIntoView({behavior:"smooth"});}
+  const r=form.getBoundingClientRect(); if(r.top<-40) form.scrollIntoView({block:"start"});}
 document.getElementById("next").onclick=()=>go(1);document.getElementById("back").onclick=()=>go(-1);
 form.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT"){e.preventDefault();go(1);}});
 document.getElementById("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText("우리은행 1005704966197");document.getElementById("copyBtn").textContent="✅ 복사됐어요!";}catch(e){document.getElementById("copyBtn").textContent="1005-704-966197";}};
