@@ -66,6 +66,8 @@ a{color:inherit}.btn{text-decoration:none;display:flex;align-items:center;justif
 .lockup .sc b{color:#489A73;font-weight:800;font-size:21px;letter-spacing:-.04em}
 .lockup .x{font-weight:900;font-size:20px;color:#999}
 .lockup img{height:38px;width:auto;display:block}
+.top{padding-right:50px}
+.top .lockup{gap:8px;padding:6px 11px}.top .lockup .sc svg{width:25px;height:25px}.top .lockup .sc b{font-size:18px}.top .lockup img{height:32px}.top .lockup .x{font-size:16px}
 .lockup.big{display:flex;justify-content:center;gap:12px;padding:18px 12px;border-radius:24px}
 .lockup.big .sc svg{width:32px;height:32px}.lockup.big .sc b{font-size:23px}.lockup.big img{height:46px;max-width:44%}.lockup.big .x{font-size:22px}
 /* ---------- hero ---------- */
@@ -184,6 +186,10 @@ footer{padding:30px 0 60px;font-size:13px;color:#555;font-weight:600;position:re
 footer b{color:var(--ink)}
 .fab{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:20;width:min(480px,calc(100% - 32px));transition:transform .3s, opacity .3s}
 .fab.hide{transform:translate(-50%,140%);opacity:0}
+.music{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:30;width:48px;height:48px;border-radius:50%;background:var(--yellow);border:4px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-size:22px;display:grid;place-items:center;animation:spinb 2.4s ease-in-out infinite}
+.music.off{background:#fff;animation:none}
+@keyframes spinb{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg) scale(1.06)}}
+.intro .hint{color:#fff;font-weight:800;font-size:15px;opacity:.9}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:60}
 </style>
 </head>
@@ -198,11 +204,13 @@ footer b{color:var(--ink)}
     <div class="seal">🎄</div>
   </div>
   <button class="tap" id="openBtn">눌러서 열어보기 👆</button>
+  <span class="hint">🎵 열면 노래가 나와요</span>
   <button class="skip" id="skipBtn">바로 보기</button>
 </div>
 
 <div class="snow" id="snow" aria-hidden="true"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
+<button class="music off" id="musicBtn" aria-label="음악 켜기">🔇</button>
 
 <div class="wrap">
   <div class="top">
@@ -468,9 +476,41 @@ function tick(){cx.clearRect(0,0,cv.width,cv.height);
   parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.a+=.15;p.t++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.strokeStyle="#1B1B1B";cx.lineWidth=2;cx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);cx.strokeRect(-p.r/2,-p.r/2,p.r,p.r*1.4);cx.restore();});
   parts=parts.filter(p=>p.y<cv.height+40&&p.t<220); if(parts.length)requestAnimationFrame(tick); else cx.clearRect(0,0,cv.width,cv.height);}
 
+
+// ===== 배경 음악 (징글벨, 저작권 없는 옛 캐럴을 직접 연주) =====
+const Music=(()=>{let ctx,master,on=false,timer,next=0,step=0;
+  const N=n=>440*Math.pow(2,(n-69)/12);
+  const C4=60,D4=62,E4=64,F4=65,G4=67,A4=69,C5=72;
+  const mel=[[E4,1],[E4,1],[E4,2],[E4,1],[E4,1],[E4,2],[E4,1],[G4,1],[C4,1.5],[D4,.5],[E4,4],
+    [F4,1],[F4,1],[F4,1.5],[F4,.5],[F4,1],[E4,1],[E4,1],[E4,.5],[E4,.5],[E4,1],[D4,1],[D4,1],[E4,1],[D4,2],[G4,2],
+    [E4,1],[E4,1],[E4,2],[E4,1],[E4,1],[E4,2],[E4,1],[G4,1],[C4,1.5],[D4,.5],[E4,4],
+    [F4,1],[F4,1],[F4,1.5],[F4,.5],[F4,1],[E4,1],[E4,1],[E4,.5],[E4,.5],[G4,1],[G4,1],[F4,1],[D4,1],[C4,4]];
+  const bass=[48,48,48,48,53,48,50,43,48,48,48,48,53,48,43,48];
+  const beat=.3;
+  function bell(f,t,d,v){const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain();
+    o.type="triangle";o.frequency.value=f;o2.type="sine";o2.frequency.value=f*2;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+Math.max(.35,d*1.4));
+    const g2=ctx.createGain();g2.gain.value=.25;o.connect(g);o2.connect(g2);g2.connect(g);g.connect(master);
+    o.start(t);o2.start(t);o.stop(t+d*1.5+.4);o2.stop(t+d*1.5+.4);}
+  function jingle(t){const len=.08,b=ctx.createBuffer(1,ctx.sampleRate*len,ctx.sampleRate),a=b.getChannelData(0);
+    for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);
+    const s=ctx.createBufferSource(),h=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=b;h.type="highpass";h.frequency.value=7000;g.gain.value=.12;
+    s.connect(h);h.connect(g);g.connect(master);s.start(t);}
+  function schedule(){while(next<ctx.currentTime+.6){const [n,d]=mel[step];bell(N(n+12),next,d*beat,.16);
+      step++; next+=d*beat; if(step>=mel.length){step=0;}}
+  }
+  let bt=0,bi=0;function bassLoop(){while(bt<ctx.currentTime+.6){const n=bass[Math.floor(bi/2)%bass.length];bell(N(n),bt,beat*1.6,.09);jingle(bt+beat);bi++;bt+=beat*2;}}
+  function start(){try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();}catch(e){return;}
+    if(!master){master=ctx.createGain();master.gain.value=.55;master.connect(ctx.destination);}
+    ctx.resume();on=true;next=bt=ctx.currentTime+.1;step=bi=0;clearInterval(timer);timer=setInterval(()=>{schedule();bassLoop();},120);ui();}
+  function stop(){on=false;clearInterval(timer);if(ctx)ctx.suspend();ui();}
+  function ui(){const b=document.getElementById("musicBtn");if(!b)return;b.textContent=on?"🎵":"🔇";b.setAttribute("aria-label",on?"음악 끄기":"음악 켜기");b.classList.toggle("off",!on);}
+  return{start,stop,toggle(){on?stop():start();},get on(){return on}};})();
+document.getElementById("musicBtn").onclick=()=>{Music.toggle();store.set("localStorage","sc_music",Music.on?"1":"0");};
+
 // 초대장 열기
 const intro=document.getElementById("intro");
-function openIntro(fx){ if(fx){document.querySelector(".env .flap").style.transform="rotateX(180deg)";confetti(110);} setTimeout(()=>intro.classList.add("gone"),fx?550:0); store.set("sessionStorage","opened","1"); }
+function openIntro(fx){ if(fx && store.get("localStorage","sc_music")!=="0") Music.start(); if(fx){document.querySelector(".env .flap").style.transform="rotateX(180deg)";confetti(110);} setTimeout(()=>intro.classList.add("gone"),fx?550:0); store.set("sessionStorage","opened","1"); }
 document.getElementById("openBtn").onclick=()=>openIntro(true);
 document.getElementById("env").onclick=()=>openIntro(true);
 document.getElementById("skipBtn").onclick=()=>openIntro(false);
