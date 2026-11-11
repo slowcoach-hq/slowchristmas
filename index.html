@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Slow Christmas 2026 · 크리스마스이브에 같이 놀자!</title>
+<meta name="description" content="12월 24일 저녁 6시, 경계선지능 청년 크리스마스 파티에 초대합니다. 같이 먹고, 같이 놀고, 친구 되는 크리스마스!">
+<meta property="og:title" content="🎁 Slow Christmas 초대장이 도착했어요!">
+<meta property="og:description" content="12.24(목) 저녁 6시 · 역삼 MARU180 · 같이 먹고, 같이 놀고, 친구 되는 크리스마스">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://slowcoach-hq.github.io/slowchristmas/">
+<meta property="og:image" content="https://slowcoach-hq.github.io/slowchristmas/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFF1DC">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#1B1B1B; --cream:#FFF1DC; --dot:#F3D9B5;
+  --red:#FF4B3E; --yellow:#FFD23F; --blue:#3FA7FF; --green:#2FBF71;
+  --sky:#8FD3FF; --mint:#9BE7B5; --pink:#FFB3C7;
+  --shadow:6px 6px 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;color:var(--ink);background:var(--cream);
+  background-image:radial-gradient(var(--dot) 2.5px,transparent 3px);background-size:30px 30px;word-break:keep-all;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:520px;margin:0 auto;padding:0 20px;position:relative}
+.snow{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.snow i{position:absolute;top:-20px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--ink);opacity:.55;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.snow{display:none}*{animation:none!important;transition:none!important}}
+
+/* ---------- intro envelope ---------- */
+.intro{position:fixed;inset:0;z-index:50;background:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:24px;
+  background-image:radial-gradient(rgba(255,255,255,.25) 3px,transparent 3.5px);background-size:34px 34px;transition:transform .7s cubic-bezier(.7,0,.3,1),opacity .5s}
+.intro.gone{transform:translateY(-105%);opacity:0;pointer-events:none}
+.intro p.t{color:#fff;font-size:30px;font-weight:900;text-align:center;line-height:1.25;-webkit-text-stroke:0;text-shadow:3px 3px 0 var(--ink)}
+.env{width:270px;height:190px;position:relative;cursor:pointer;animation:wiggle 1.6s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-6px)}}
+.env .body{position:absolute;inset:0;background:var(--cream);border:6px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 var(--ink)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:120px;transform-origin:top;transition:transform .5s}
+.env .seal{position:absolute;left:50%;top:84px;transform:translateX(-50%);width:64px;height:64px;border-radius:50%;background:var(--yellow);border:5px solid var(--ink);display:grid;place-items:center;font-size:30px}
+.intro .tap{background:#fff;border:5px solid var(--ink);border-radius:999px;padding:14px 30px;font-size:22px;font-weight:900;box-shadow:var(--shadow)}
+.intro .skip{color:#fff;font-weight:700;text-decoration:underline;font-size:16px}
+
+/* ---------- common ---------- */
+section{padding:34px 0;position:relative;z-index:2}
+.sticker{border:5px solid var(--ink);border-radius:26px;box-shadow:var(--shadow);background:#fff}
+.chip{display:inline-block;background:var(--ink);color:#fff;font-weight:900;font-size:15px;border-radius:999px;padding:6px 14px;letter-spacing:.02em}
+h2{font-size:32px;font-weight:900;letter-spacing:-.04em;line-height:1.2;margin:12px 0 18px}
+h2 em{font-style:normal;color:var(--red)}
+a{color:inherit}.btn{text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:68px;border:5px solid var(--ink);border-radius:22px;box-shadow:var(--shadow);
+  font-size:23px;font-weight:900;letter-spacing:-.02em;background:var(--yellow);transition:transform .08s, box-shadow .08s}
+.btn:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink)}
+.btn.red{background:var(--red);color:#fff;text-shadow:2px 2px 0 var(--ink)}
+.btn.white{background:#fff}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* ---------- hero ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;padding-top:22px;position:relative;z-index:2}
+.top .host{background:#fff;border:4px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:900;font-size:14px;box-shadow:3px 3px 0 var(--ink)}
+.hero{padding-top:22px;text-align:left}
+.blocks{display:flex;gap:9px;margin-top:6px}
+.blk{flex:1;aspect-ratio:1;max-width:104px;border:5px solid var(--ink);border-radius:22px;display:grid;place-items:center;font-size:clamp(48px,15vw,78px);font-weight:900;color:#fff;
+  -webkit-text-stroke:4px var(--ink);paint-order:stroke fill;box-shadow:7px 7px 0 var(--ink);position:relative;animation:bob 2.4s ease-in-out infinite}
+.blk:after{content:"";position:absolute;left:10px;top:9px;width:24px;height:11px;border-radius:20px;background:rgba(255,255,255,.55)}
+.blk:nth-child(1){background:var(--red);--r:-7deg}.blk:nth-child(2){background:var(--yellow);--r:5deg;animation-delay:.2s}
+.blk:nth-child(3){background:var(--blue);--r:-4deg;animation-delay:.4s}.blk:nth-child(4){background:var(--green);--r:7deg;animation-delay:.6s}
+@keyframes bob{0%,100%{transform:rotate(var(--r)) translateY(0)}50%{transform:rotate(var(--r)) translateY(-7px)}}
+.xmas{margin-top:22px;font-size:clamp(44px,13.4vw,70px);font-weight:900;letter-spacing:-.045em;line-height:1;-webkit-text-stroke:5px var(--ink);paint-order:stroke fill;
+  text-shadow:6px 6px 0 var(--ink);transform:rotate(-2deg);white-space:nowrap}
+.xmas span:nth-child(odd){color:var(--red)}.xmas span:nth-child(even){color:var(--green)}
+.hello{margin-top:26px;padding:22px 22px 20px;transform:rotate(-1deg)}
+.hello b{display:block;font-size:30px;font-weight:900;letter-spacing:-.045em;line-height:1.22}
+.hello b span{color:var(--red)}
+.hello p{margin-top:10px;font-size:18px;font-weight:600;color:#444}
+.dday{display:flex;align-items:center;gap:12px;margin-top:22px}
+.dday .num{background:var(--ink);color:var(--yellow);font-weight:900;font-size:30px;border-radius:16px;padding:6px 14px;letter-spacing:-.02em}
+.dday .txt{font-weight:800;font-size:17px}
+.hero .cta{margin-top:20px}
+.deco{position:absolute;z-index:3;pointer-events:none}
+
+/* ---------- info cards ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{border:5px solid var(--ink);border-radius:22px;box-shadow:var(--shadow);padding:16px 16px 14px}
+.card .k{font-size:14px}
+.card .v{margin-top:8px;font-size:23px;font-weight:900;letter-spacing:-.03em;line-height:1.15}
+.card .v small{display:block;font-size:15px;font-weight:700;opacity:.75;margin-top:4px;letter-spacing:0}
+.card.wide{grid-column:1/-1}
+.c1{background:var(--yellow);transform:rotate(-1.5deg)}.c2{background:var(--sky);transform:rotate(1.2deg)}
+.c3{background:var(--mint);transform:rotate(1deg)}.c4{background:var(--pink);transform:rotate(-1.2deg)}
+
+/* ---------- what we do ---------- */
+.do{display:grid;gap:16px}
+.do .item{display:flex;gap:16px;align-items:center;padding:16px 18px}
+.do .ico{flex:none;width:68px;height:68px;border:4px solid var(--ink);border-radius:18px;display:grid;place-items:center;font-size:36px}
+.do b{font-size:22px;font-weight:900;letter-spacing:-.03em;display:block}
+.do p{font-size:16px;font-weight:600;color:#555}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;padding-left:4px}
+.tl .row{display:flex;gap:14px;align-items:stretch;margin-bottom:12px}
+.tl .time{flex:none;width:76px;font-weight:900;font-size:19px;padding-top:14px;text-align:right}
+.tl .box{flex:1;padding:12px 16px;border:4px solid var(--ink);border-radius:18px;background:#fff;box-shadow:4px 4px 0 var(--ink);display:flex;gap:12px;align-items:center}
+.tl .box span{font-size:30px}
+.tl .box b{font-size:19px;font-weight:900;display:block;letter-spacing:-.02em}
+.tl .box p{font-size:15px;color:#555;font-weight:600}
+.note{font-size:14px;color:#666;font-weight:600;margin-top:6px}
+
+/* ---------- ok list ---------- */
+.ok{padding:22px;background:var(--mint)}
+.ok li{list-style:none;display:flex;gap:12px;align-items:flex-start;font-size:19px;font-weight:800;padding:8px 0;border-bottom:3px dashed rgba(0,0,0,.18)}
+.ok li:last-child{border:none}
+.ok li i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;background:#fff;border:3px solid var(--ink);display:grid;place-items:center;font-size:17px}
+
+/* ---------- map ---------- */
+.map{padding:20px}
+.route{display:flex;align-items:center;gap:8px;margin:14px 0;flex-wrap:wrap}
+.route .st{background:#33A23D;color:#fff;font-weight:900;border-radius:999px;padding:6px 12px;border:3px solid var(--ink)}
+.route .arrow{font-weight:900;font-size:20px}
+.route .pl{background:var(--yellow);font-weight:900;border-radius:999px;padding:6px 12px;border:3px solid var(--ink)}
+.map p{font-size:17px;font-weight:700}
+
+/* ---------- faq ---------- */
+.faq details{border:4px solid var(--ink);border-radius:18px;background:#fff;box-shadow:4px 4px 0 var(--ink);margin-bottom:14px;overflow:hidden}
+.faq summary{list-style:none;padding:16px 18px;font-size:19px;font-weight:900;display:flex;justify-content:space-between;gap:10px;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"＋";font-weight:900}
+.faq details[open] summary:after{content:"－"}
+.faq details p{padding:0 18px 16px;font-size:17px;font-weight:600;color:#444}
+
+/* ---------- form (wizard) ---------- */
+.apply{padding:22px 20px 24px;background:#fff}
+.prog{display:flex;gap:5px;margin:12px 0 18px}
+.prog i{flex:1;height:12px;border-radius:99px;border:3px solid var(--ink);background:#fff}
+.prog i.on{background:var(--green)}
+.step{display:none;animation:pop .35s ease}
+.step.on{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.q{font-size:27px;font-weight:900;letter-spacing:-.04em;line-height:1.25}
+.q small{display:block;font-size:16px;font-weight:700;color:#666;letter-spacing:0;margin-top:6px}
+.inp{width:100%;margin-top:18px;font:inherit;font-size:22px;font-weight:700;padding:16px 18px;border:4px solid var(--ink);border-radius:18px;background:var(--cream);outline:none}
+.inp:focus{background:#fff;box-shadow:4px 4px 0 var(--ink)}
+textarea.inp{min-height:110px;resize:vertical;font-size:19px}
+.opts{display:grid;gap:10px;margin-top:18px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{display:flex;align-items:center;gap:10px;padding:14px 14px;border:4px solid var(--ink);border-radius:18px;background:#fff;font-size:18px;font-weight:800;text-align:left;box-shadow:3px 3px 0 var(--ink);min-height:62px}
+.opt .e{font-size:26px;flex:none}
+.opts.two .opt{flex-direction:column;justify-content:center;text-align:center;gap:4px;min-height:96px;font-size:17px;position:relative}
+.opts.two .opt.sel:after{position:absolute;top:6px;right:10px;margin:0}
+.opt.sel{background:var(--yellow);box-shadow:inset 0 0 0 3px #fff, 3px 3px 0 var(--ink)}
+.opt.sel:after{content:"✔";margin-left:auto;font-weight:900}
+.nav{display:flex;gap:12px;margin-top:22px}
+.nav .back{flex:0 0 96px;min-height:68px;border:5px solid var(--ink);border-radius:22px;background:#fff;font-weight:900;font-size:18px;box-shadow:var(--shadow)}
+.err{color:var(--red);font-weight:800;font-size:16px;margin-top:10px;min-height:1px}
+.agree{margin-top:16px;padding:14px 16px;border:3px dashed var(--ink);border-radius:16px;font-size:14px;color:#444;font-weight:600;background:var(--cream)}
+.agree b{color:var(--ink)}
+.check{display:flex;gap:12px;align-items:center;margin-top:14px;font-size:19px;font-weight:900;cursor:pointer}
+.check input{width:30px;height:30px;accent-color:var(--green)}
+.summary{margin-top:14px;padding:14px 16px;border:3px solid var(--ink);border-radius:16px;background:var(--cream);font-size:16px;font-weight:700}
+.summary div{padding:3px 0}
+
+/* ---------- done ---------- */
+.done{text-align:center}
+.done .big{font-size:64px}
+.pay{margin-top:16px;padding:18px;border:4px solid var(--ink);border-radius:20px;background:var(--yellow);text-align:left}
+.pay .acc{white-space:nowrap;font-size:clamp(17px,5.4vw,22px);font-weight:900;letter-spacing:-.01em;margin:6px 0}
+.pay p{font-size:16px;font-weight:700}
+.copy{margin-top:10px;width:100%;min-height:54px;border:4px solid var(--ink);border-radius:16px;background:#fff;font-weight:900;font-size:18px;box-shadow:3px 3px 0 var(--ink)}
+
+footer{padding:30px 0 60px;font-size:13px;color:#555;font-weight:600;position:relative;z-index:2}
+footer b{color:var(--ink)}
+.fab{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:20;width:min(480px,calc(100% - 32px));transition:transform .3s, opacity .3s}
+.fab.hide{transform:translate(-50%,140%);opacity:0}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:60}
+</style>
+</head>
+<body>
+
+<!-- 초대장 열기 -->
+<div class="intro" id="intro" role="dialog" aria-label="초대장">
+  <p class="t">🎁 초대장이<br>도착했어요!</p>
+  <div class="env" id="env" aria-hidden="true">
+    <div class="body"></div>
+    <svg class="flap" viewBox="0 0 270 120" preserveAspectRatio="none"><path d="M6 6 L135 104 L264 6 Z" fill="#FFE2B8" stroke="#1B1B1B" stroke-width="6" stroke-linejoin="round"/></svg>
+    <div class="seal">🎄</div>
+  </div>
+  <button class="tap" id="openBtn">눌러서 열어보기 👆</button>
+  <button class="skip" id="skipBtn">바로 보기</button>
+</div>
+
+<div class="snow" id="snow" aria-hidden="true"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <div class="top">
+    <span class="chip">슬로코치 × 노원 유센터</span>
+    <span class="host">🎄 초대장</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="소개">
+    <div class="blocks" aria-label="SLOW"><div class="blk">S</div><div class="blk">L</div><div class="blk">O</div><div class="blk">W</div></div>
+    <div class="xmas" aria-label="CHRISTMAS"><span>C</span><span>H</span><span>R</span><span>I</span><span>S</span><span>T</span><span>M</span><span>A</span><span>S</span></div>
+
+    
+    <div class="hello sticker">
+      <b>같이 먹고, 같이 놀고,<br><span>친구 되는 크리스마스!</span></b>
+      <p>올해 크리스마스이브는 혼자 말고 같이 보내요.<br>맛있는 저녁, 재밌는 게임, 깜짝 공연이 기다려요.</p>
+    </div>
+
+    <div class="dday"><span class="num" id="dday">D-?</span><span class="txt">크리스마스이브 파티까지 🎅</span></div>
+    <div class="cta"><a href="#apply" class="btn red">🎁 파티 신청하기</a></div>
+  </section>
+
+  <!-- INFO -->
+  <section aria-label="파티 정보">
+    <span class="chip">파티 정보</span>
+    <h2>언제, 어디서 해요?</h2>
+    <div class="grid">
+      <div class="card c1"><span class="chip k">언제</span><div class="v">12월 24일<br>(목)<small>저녁 6시 ~ 9시</small></div></div>
+      <div class="card c2"><span class="chip k">어디서</span><div class="v">역삼<br>MARU180<small>지하 1층</small></div></div>
+      <div class="card c3"><span class="chip k">누가</span><div class="v">경계선지능<br>청년<small>혼자 와도 괜찮아요</small></div></div>
+      <div class="card c4"><span class="chip k">참가비</span><div class="v">5,000원<small>저녁밥 포함!</small></div></div>
+    </div>
+  </section>
+
+  <!-- WHAT -->
+  <section aria-label="하는 것">
+    <span class="chip">파티에서 해요</span>
+    <h2>이런 걸 <em>같이</em> 해요</h2>
+    <div class="do">
+      <div class="item sticker"><div class="ico" style="background:var(--yellow)">🍗</div><div><b>크리스마스 저녁</b><p>맛있는 저녁을 다 같이 먹어요</p></div></div>
+      <div class="item sticker"><div class="ico" style="background:var(--sky)">🎲</div><div><b>친구 찾기 게임</b><p>좋아하는 게 같은 친구를 찾아요</p></div></div>
+      <div class="item sticker"><div class="ico" style="background:var(--pink)">🎤</div><div><b>깜짝 공연</b><p>무슨 공연인지는 그날 공개!</p></div></div>
+      <div class="item sticker"><div class="ico" style="background:var(--mint)">📸</div><div><b>크리스마스 사진</b><p>친구랑 같이 사진도 찍어요</p></div></div>
+    </div>
+    <p class="note">※ 신청할 때 "하고 싶은 것"을 적어 주세요. 많이 나온 걸로 파티를 꾸며요!</p>
+  </section>
+
+  <!-- TIMELINE -->
+  <section aria-label="순서">
+    <span class="chip">그날 순서</span>
+    <h2>파티는 이렇게 흘러가요</h2>
+    <div class="tl">
+      <div class="row"><div class="time">6:00</div><div class="box"><span>👋</span><div><b>도착 · 이름표 받기</b><p>좋아하는 것 스티커를 붙여요</p></div></div></div>
+      <div class="row"><div class="time">6:20</div><div class="box"><span>🍗</span><div><b>다 같이 저녁</b><p>조별 테이블에 앉아요</p></div></div></div>
+      <div class="row"><div class="time">7:10</div><div class="box"><span>🎲</span><div><b>친구 찾기 게임</b><p>지는 사람 없는 쉬운 게임</p></div></div></div>
+      <div class="row"><div class="time">8:00</div><div class="box"><span>🎤</span><div><b>깜짝 공연</b><p>앉아서 즐기면 돼요</p></div></div></div>
+      <div class="row"><div class="time">8:30</div><div class="box"><span>💌</span><div><b>카드 쓰기 · 단체 사진</b><p>오늘 만난 친구에게 한마디</p></div></div></div>
+      <div class="row"><div class="time">9:00</div><div class="box"><span>🏠</span><div><b>안전하게 집으로</b><p>메리 크리스마스!</p></div></div></div>
+    </div>
+    <p class="note">※ 시간은 조금 바뀔 수 있어요. 바뀌면 문자로 알려 드려요.</p>
+  </section>
+
+  <!-- OK -->
+  <section aria-label="걱정하지 마세요">
+    <span class="chip">걱정 마세요</span>
+    <h2>처음이어도 <em>괜찮아요</em></h2>
+    <ul class="ok sticker">
+      <li><i>🙋</i>혼자 와도 괜찮아요. 도우미 선생님이 옆에 있어요.</li>
+      <li><i>🏷️</i>이름표가 있어서 이름을 몰라도 돼요.</li>
+      <li><i>💬</i>말을 잘 못해도 괜찮아요. 게임이 도와줘요.</li>
+      <li><i>🛋️</i>쉬고 싶으면 언제든 쉬어도 돼요.</li>
+      <li><i>📱</i>모르는 게 있으면 문자로 물어보세요.</li>
+    </ul>
+  </section>
+
+  <!-- MAP -->
+  <section aria-label="오시는 길">
+    <span class="chip">오는 길</span>
+    <h2>역삼역에서 걸어서 7분</h2>
+    <div class="map sticker">
+      <div class="route"><span class="st">2호선 역삼역</span><span class="arrow">→</span><span class="pl">2번 출구</span><span class="arrow">→</span><span class="pl">걸어서 7분</span></div>
+      <p>📍 서울 강남구 역삼로 180, MARU180 <b>지하 1층 이벤트홀</b></p>
+      <p style="font-size:15px;color:#555;margin-top:4px">2번 출구로 나와서 도곡동 쪽으로 쭉 걸어오면 빨간 벽돌 건물이 보여요. 주차는 안 돼요.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+        <a class="btn white" style="min-height:56px;font-size:18px" href="https://map.kakao.com/link/search/MARU180" target="_blank" rel="noopener">🗺️ 카카오맵</a>
+        <a class="btn white" style="min-height:56px;font-size:18px" href="https://map.naver.com/p/search/%EB%A7%88%EB%A3%A8180" target="_blank" rel="noopener">🧭 네이버지도</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" aria-label="자주 묻는 질문">
+    <span class="chip">궁금해요</span>
+    <h2>자주 묻는 질문</h2>
+    <details><summary>뭘 가져가야 해요?</summary><p>아무것도 안 가져와도 돼요! 몸만 오세요. 따뜻한 옷은 꼭 입고 오세요. 🧣</p></details>
+    <details><summary>참가비는 어떻게 내요?</summary><p>신청을 다 하면 계좌번호가 나와요. 5,000원을 보내면 신청 끝! 이름으로 보내 주세요.</p></details>
+    <details><summary>못 가게 되면요?</summary><p>12월 21일(월)까지 문자로 알려 주면 5,000원을 돌려 드려요.</p></details>
+    <details><summary>친구랑 같이 가도 돼요?</summary><p>그럼요! 친구도 이 페이지에서 따로 신청해 주세요.</p></details>
+    <details><summary>보호자나 선생님이 같이 가도 돼요?</summary><p>네, 괜찮아요. 신청할 때 "선생님·보호자랑 와요"를 골라 주세요.</p></details>
+  </section>
+
+  <!-- APPLY -->
+  <section id="apply" aria-label="신청하기">
+    <span class="chip">신청하기</span>
+    <h2>🎁 파티 신청서</h2>
+    <form class="apply sticker" id="form" novalidate onsubmit="return false">
+      <div class="prog" id="prog"></div>
+
+      <div class="step" data-k="name">
+        <p class="q">이름이 뭐예요?<small>이름표에 이 이름을 써요</small></p>
+        <input class="inp" name="uname" autocomplete="name" placeholder="예) 김슬로" maxlength="20">
+      </div>
+
+      <div class="step" data-k="birth">
+        <p class="q">몇 년생이에요?<small>숫자 4개로 써 주세요</small></p>
+        <input class="inp" name="birth" inputmode="numeric" pattern="[0-9]*" placeholder="예) 2001" maxlength="4">
+      </div>
+
+      <div class="step" data-k="phone">
+        <p class="q">휴대폰 번호를 알려 주세요<small>파티 안내 문자를 보내 드려요</small></p>
+        <input class="inp" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" maxlength="13">
+      </div>
+
+      <div class="step" data-k="from" data-type="one">
+        <p class="q">어디서 알게 됐어요?</p>
+        <div class="opts">
+          <button type="button" class="opt" data-v="노원 유센터"><span class="e">🏫</span>노원 유센터</button>
+          <button type="button" class="opt" data-v="밈센터"><span class="e">🏢</span>밈센터</button>
+          <button type="button" class="opt" data-v="선생님 소개"><span class="e">👩‍🏫</span>선생님이 알려줬어요</button>
+          <button type="button" class="opt" data-v="친구·가족"><span class="e">👫</span>친구·가족이 알려줬어요</button>
+          <button type="button" class="opt" data-v="인스타·유튜브"><span class="e">📱</span>인스타·유튜브</button>
+          <button type="button" class="opt" data-v="기타"><span class="e">✏️</span>그 밖에</button>
+        </div>
+      </div>
+
+      <div class="step" data-k="with" data-type="one">
+        <p class="q">누구랑 와요?</p>
+        <div class="opts">
+          <button type="button" class="opt" data-v="혼자"><span class="e">🙋</span>혼자 와요</button>
+          <button type="button" class="opt" data-v="친구랑"><span class="e">👯</span>친구랑 같이 와요<br></button>
+          <button type="button" class="opt" data-v="선생님·보호자랑"><span class="e">🧑‍🤝‍🧑</span>선생님·보호자랑 와요</button>
+        </div>
+        <p class="note">친구도 따로 신청해 주세요!</p>
+      </div>
+
+      <div class="step" data-k="wish" data-type="many">
+        <p class="q">파티에서 뭐 하고 싶어요?<small>여러 개 골라도 돼요 ✨</small></p>
+        <div class="opts two">
+          <button type="button" class="opt" data-v="새 친구 사귀기"><span class="e">🤝</span>새 친구 사귀기</button>
+          <button type="button" class="opt" data-v="맛있는 거 먹기"><span class="e">🍕</span>맛있는 거 먹기</button>
+          <button type="button" class="opt" data-v="게임"><span class="e">🎲</span>게임하기</button>
+          <button type="button" class="opt" data-v="선물 교환"><span class="e">🎁</span>선물 교환</button>
+          <button type="button" class="opt" data-v="노래·춤"><span class="e">🎤</span>노래·춤</button>
+          <button type="button" class="opt" data-v="사진 찍기"><span class="e">📸</span>사진 찍기</button>
+          <button type="button" class="opt" data-v="공연 보기"><span class="e">🎭</span>공연 보기</button>
+          <button type="button" class="opt" data-v="이야기 나누기"><span class="e">💬</span>이야기 나누기</button>
+        </div>
+        <textarea class="inp" name="wishText" placeholder="하고 싶은 걸 자유롭게 써 주세요!&#10;예) 마피아 게임 하고 싶어요, 산타 모자 쓰고 싶어요" maxlength="300"></textarea>
+      </div>
+
+      <div class="step" data-k="likes">
+        <p class="q">요즘 좋아하는 게 뭐예요?<small>이름표에 붙여서 비슷한 친구를 찾아 줄게요</small></p>
+        <input class="inp" name="likes" placeholder="예) 고양이, 롤, 아이돌, 떡볶이" maxlength="60">
+      </div>
+
+      <div class="step" data-k="food" data-type="one">
+        <p class="q">못 먹는 음식이 있어요?</p>
+        <div class="opts two">
+          <button type="button" class="opt" data-v="없어요"><span class="e">😋</span>없어요</button>
+          <button type="button" class="opt" data-v="있어요"><span class="e">🙅</span>있어요</button>
+        </div>
+        <input class="inp" name="foodText" placeholder="못 먹는 음식을 써 주세요 (예: 땅콩, 매운 음식)" maxlength="60" style="display:none">
+      </div>
+
+      <div class="step" data-k="help">
+        <p class="q">우리가 미리 알면 좋은 게 있어요?<small>없으면 비워 두고 "다음"을 눌러요</small></p>
+        <textarea class="inp" name="help" placeholder="예) 시끄러운 곳이 힘들어요&#10;예) 역에서 길 찾는 게 어려워요" maxlength="300"></textarea>
+      </div>
+
+      <div class="step" data-k="photo" data-type="one">
+        <p class="q">사진에 얼굴이 나와도 괜찮아요?<small>파티 사진은 기록과 소식 알림에 써요</small></p>
+        <div class="opts">
+          <button type="button" class="opt" data-v="얼굴 나와도 OK"><span class="e">😄</span>네, 괜찮아요</button>
+          <button type="button" class="opt" data-v="얼굴은 빼 주세요"><span class="e">🙈</span>얼굴은 빼 주세요</button>
+        </div>
+      </div>
+
+      <div class="step" data-k="agree">
+        <p class="q">마지막! 확인해 주세요 ✅</p>
+        <div class="summary" id="summary"></div>
+        <div class="agree">
+          <b>개인정보를 이렇게 써요</b><br>
+          · 받는 것: 이름, 태어난 해, 휴대폰 번호, 신청서에 쓴 내용<br>
+          · 쓰는 곳: 참가 확인, 안내 문자, 이름표, 저녁 준비<br>
+          · 보관: 파티가 끝나고 1달 뒤(2027년 1월 24일)에 지워요<br>
+          · 동의하지 않을 수 있어요. 다만 그러면 신청할 수 없어요.
+        </div>
+        <label class="check"><input type="checkbox" name="agree"> 네, 동의해요</label>
+      </div>
+
+      <p class="err" id="err" role="alert"></p>
+      <div class="nav">
+        <button type="button" class="back" id="back">← 이전</button>
+        <button type="button" class="btn" id="next">다음 →</button>
+      </div>
+    </form>
+
+    <div class="apply sticker done" id="done" style="display:none" aria-live="polite">
+      <div class="big">🎉</div>
+      <p class="q" style="margin-top:6px">신청이 거의 끝났어요!</p>
+      <p style="font-size:18px;font-weight:700;margin-top:8px">참가비 <b>5,000원</b>을 보내면 신청 끝!</p>
+      <div class="pay">
+        <p>🏦 보낼 곳</p>
+        <p class="acc">우리은행 1005-704-966197</p>
+        <p>받는 사람: 주식회사 슬로코치</p>
+        <p style="margin-top:8px">✍️ 보내는 사람 이름: <b id="payName">신청한 이름</b></p>
+        <p style="margin-top:4px">⏰ 신청하고 <b>3일 안에</b> 보내 주세요</p>
+        <button class="copy" id="copyBtn">📋 계좌번호 복사하기</button>
+      </div>
+      <p style="font-size:16px;font-weight:700;margin-top:16px;color:#444">돈을 보내면 확인 문자를 보내 드려요.<br>12월 24일에 만나요! 🎄</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>주최</b> 주식회사 슬로코치 · 노원구 경계선지능인 평생교육지원센터(노원 유센터)</p>
+    <p style="margin-top:6px"><b>문의</b> samuel918@slowcoach.kr</p>
+    <p style="margin-top:6px">장소: 아산나눔재단 MARU180 (재단은 공간을 후원하며, 행사 주최와 운영에는 참여하지 않습니다)</p>
+  </footer>
+</div>
+
+<a href="#apply" class="btn red fab hide" id="fab">🎁 파티 신청하기</a>
+
+<script>
+// ===== 설정 =====
+const store={get:(s,k)=>{try{return window[s].getItem(k)}catch(e){return null}},set:(s,k,v)=>{try{window[s].setItem(k,v)}catch(e){}}};
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwS7dwSfSJ-BpRTm6Ud2bkv1hfwbuPlDJlyzhqsNDm247QHKpyj3dcRNsqaJdQxVlE4zQ/exec"; // 신청 → 회사 구글시트
+const EVENT = new Date("2026-12-24T18:00:00+09:00");
+
+// D-day
+(function(){
+  const now = new Date();
+  const kst = d => new Date(d.toLocaleString("en-US",{timeZone:"Asia/Seoul"}));
+  const a = kst(now); a.setHours(0,0,0,0);
+  const b = kst(EVENT); b.setHours(0,0,0,0);
+  const d = Math.round((b-a)/86400000);
+  document.getElementById("dday").textContent = d>0 ? "D-"+d : d===0 ? "D-DAY" : "끝!";
+})();
+
+// 눈
+(function(){
+  const s=document.getElementById("snow");
+  for(let i=0;i<22;i++){const e=document.createElement("i");const z=6+Math.random()*10;
+    e.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${7+Math.random()*9}s;animation-delay:${-Math.random()*12}s;background:${["#fff","#fff","#FFD23F","#FF4B3E","#2FBF71"][i%5]}`;s.appendChild(e);}
+})();
+
+// 색종이
+const cv=document.getElementById("confetti"),cx=cv.getContext("2d");let parts=[];
+function confetti(n=140){cv.width=innerWidth;cv.height=innerHeight;
+  const cols=["#FF4B3E","#FFD23F","#3FA7FF","#2FBF71","#FFB3C7"];
+  for(let i=0;i<n;i++)parts.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,r:6+Math.random()*7,c:cols[i%5],a:Math.random()*6,t:0});
+  if(parts.length===n)requestAnimationFrame(tick);}
+function tick(){cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.a+=.15;p.t++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.strokeStyle="#1B1B1B";cx.lineWidth=2;cx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);cx.strokeRect(-p.r/2,-p.r/2,p.r,p.r*1.4);cx.restore();});
+  parts=parts.filter(p=>p.y<cv.height+40&&p.t<220); if(parts.length)requestAnimationFrame(tick); else cx.clearRect(0,0,cv.width,cv.height);}
+
+// 초대장 열기
+const intro=document.getElementById("intro");
+function openIntro(fx){ if(fx){document.querySelector(".env .flap").style.transform="rotateX(180deg)";confetti(110);} setTimeout(()=>intro.classList.add("gone"),fx?550:0); store.set("sessionStorage","opened","1"); }
+document.getElementById("openBtn").onclick=()=>openIntro(true);
+document.getElementById("env").onclick=()=>openIntro(true);
+document.getElementById("skipBtn").onclick=()=>openIntro(false);
+if(store.get("sessionStorage","opened")||location.hash==="#apply") intro.classList.add("gone");
+
+// 떠 있는 신청 버튼
+const fab=document.getElementById("fab"),applyEl=document.getElementById("apply");
+addEventListener("scroll",()=>{const r=applyEl.getBoundingClientRect();fab.classList.toggle("hide",scrollY<420||r.top<innerHeight*.9);},{passive:true});
+
+// ===== 신청서 =====
+const steps=[...document.querySelectorAll(".step")],form=document.getElementById("form"),err=document.getElementById("err");
+const prog=document.getElementById("prog");steps.forEach(()=>prog.appendChild(document.createElement("i")));
+let cur=0;const data={};
+function show(i){steps.forEach((s,j)=>s.classList.toggle("on",j===i));[...prog.children].forEach((p,j)=>p.classList.toggle("on",j<=i));
+  document.getElementById("back").style.visibility=i?"visible":"hidden";
+  document.getElementById("next").textContent=i===steps.length-1?"🎁 신청하기":"다음 →"; err.textContent="";
+  if(steps[i].dataset.k==="agree")renderSummary();
+  const f=steps[i].querySelector("input.inp,textarea.inp"); if(f&&i>0&&f.offsetParent)setTimeout(()=>f.focus({preventScroll:true}),50);}
+document.querySelectorAll(".step[data-type]").forEach(st=>{const many=st.dataset.type==="many";
+  st.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ if(!many)st.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel")); b.classList.toggle("sel");
+    if(st.dataset.k==="food"){const t=form.foodText;t.style.display=b.dataset.v==="있어요"&&b.classList.contains("sel")?"block":"none";}
+    if(!many && st.dataset.k!=="food") setTimeout(()=>go(1),220); });});
+const sel=k=>[...document.querySelectorAll(`.step[data-k="${k}"] .opt.sel`)].map(b=>b.dataset.v);
+form.phone.addEventListener("input",e=>{let v=e.target.value.replace(/\D/g,"").slice(0,11);e.target.value=v.length>7?v.replace(/(\d{3})(\d{4})(\d+)/,"$1-$2-$3"):v.length>3?v.replace(/(\d{3})(\d+)/,"$1-$2"):v;});
+function check(k){
+  if(k==="name"&&form.uname.value.trim().length<2)return"이름을 써 주세요 🙂";
+  if(k==="birth"){const y=+form.birth.value;if(!(y>=1970&&y<=2012))return"태어난 해를 숫자 4개로 써 주세요 (예: 2001)";}
+  if(k==="phone"&&!/^01\d-?\d{3,4}-?\d{4}$/.test(form.phone.value))return"휴대폰 번호를 다시 확인해 주세요";
+  if(["from","with","photo","food"].includes(k)&&!sel(k).length)return"하나를 골라 주세요 👆";
+  if(k==="food"&&sel(k)[0]==="있어요"&&!form.foodText.value.trim())return"못 먹는 음식을 써 주세요";
+  if(k==="wish"&&!sel(k).length&&!form.wishText.value.trim())return"하고 싶은 걸 하나 이상 골라 주세요 ✨";
+  if(k==="agree"&&!form.agree.checked)return"동의에 체크해 주세요 ✅";
+  return"";}
+function collect(){return{name:form.uname.value.trim(),birth:form.birth.value.trim(),phone:form.phone.value.trim(),from:sel("from").join(", "),with:sel("with").join(", "),
+  wish:sel("wish").join(", "),wishText:form.wishText.value.trim(),likes:form.likes.value.trim(),food:sel("food")[0]==="있어요"?form.foodText.value.trim():"없음",
+  help:form.help.value.trim(),photo:sel("photo").join(", "),agree:"동의",ua:navigator.userAgent.slice(0,120)};}
+function renderSummary(){const d=collect();document.getElementById("summary").innerHTML=
+  [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish,d.wishText].filter(Boolean).join(" / ")]].map(([a,b])=>`<div>✔ ${a}: <b>${(b||"-").replace(/</g,"&lt;")}</b></div>`).join("");}
+async function submit(){const d=collect();const btn=document.getElementById("next");btn.disabled=true;btn.textContent="보내는 중… 🎁";
+  try{
+    const body=JSON.stringify(d);
+    try{const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});const j=await r.json();if(!j.ok)throw new Error("server");}
+    catch(e1){ if(e1.message==="server")throw e1; await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body}); }
+    store.set("localStorage","sc2026_applied",d.name);
+    document.getElementById("payName").textContent=d.name;
+    form.style.display="none";document.getElementById("done").style.display="block";
+    document.getElementById("apply").scrollIntoView({behavior:"smooth"});confetti(170);
+  }catch(e){err.textContent="앗, 전송이 안 됐어요. 인터넷을 확인하고 다시 눌러 주세요.";btn.disabled=false;btn.textContent="🎁 신청하기";}}
+function go(dir){ if(dir>0){const m=check(steps[cur].dataset.k);if(m){err.textContent=m;return;} if(cur===steps.length-1)return submit();}
+  cur=Math.max(0,Math.min(steps.length-1,cur+dir));show(cur);
+  const r=form.getBoundingClientRect(); if(r.top<0||r.top>innerHeight*.4) document.getElementById("apply").scrollIntoView({behavior:"smooth"});}
+document.getElementById("next").onclick=()=>go(1);document.getElementById("back").onclick=()=>go(-1);
+form.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT"){e.preventDefault();go(1);}});
+document.getElementById("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText("우리은행 1005704966197");document.getElementById("copyBtn").textContent="✅ 복사됐어요!";}catch(e){document.getElementById("copyBtn").textContent="1005-704-966197";}};
+show(0);
+</script>
+</body>
+</html>
