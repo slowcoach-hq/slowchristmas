@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FFF1DC">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" integrity="sha384-GIdEBaqGN9mNkDkMkzMHW8EKUqtpPIe/sLj1X7DIrnc9uPtLROJgmuDlh+3rBw0j" crossorigin="anonymous">
 <style>
 :root{
   --ink:#1B1B1B; --cream:#FFF1DC; --dot:#F3D9B5;
@@ -302,7 +302,7 @@ footer b{color:var(--ink)}
     <span class="chip">궁금해요</span>
     <h2>자주 묻는 질문</h2>
     <details><summary>뭘 가져가야 해요?</summary><p>아무것도 안 가져와도 돼요! 몸만 오세요. 따뜻한 옷은 꼭 입고 오세요. 🧣</p></details>
-    <details><summary>참가비는 어떻게 내요?</summary><p>신청을 다 하면 계좌번호가 나와요. 5,000원을 보내면 신청 끝! 이름으로 보내 주세요.</p></details>
+    <details><summary>참가비는 어떻게 내요?</summary><p>신청을 다 하면 계좌번호가 나와요. 5,000원을 보내면 신청 끝! 보내는 사람 이름은 "이름+휴대폰 뒷4자리"로 써 주세요.</p></details>
     <details><summary>못 가게 되면요?</summary><p>12월 21일(월)까지 문자로 알려 주면 5,000원을 돌려 드려요.</p></details>
     <details><summary>친구랑 같이 가도 돼요?</summary><p>그럼요! 친구도 이 페이지에서 따로 신청해 주세요.</p></details>
     <details><summary>부모님이랑 같이 가도 돼요?</summary><p>이 파티는 <b>청년만</b> 참여할 수 있어요. 부모님은 같이 들어올 수 없어요. 건물 입구까지 데려다주고, 끝날 때 데리러 오는 건 괜찮아요.</p></details>
@@ -312,7 +312,8 @@ footer b{color:var(--ink)}
   <section id="apply" aria-label="신청하기">
     <span class="chip">신청하기</span>
     <h2>🎁 파티 신청서</h2>
-    <form class="apply sticker" id="form" novalidate onsubmit="return false">
+    <form class="apply sticker" id="form" novalidate>
+      <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>비워 두세요<input type="text" name="hp" tabindex="-1" autocomplete="off"></label></div>
       <div class="prog" id="prog"></div>
       <div class="steps-box">
 
@@ -322,7 +323,7 @@ footer b{color:var(--ink)}
       </div>
 
       <div class="step" data-k="birth">
-        <p class="q">몇 년생이에요?<small>숫자 4개로 써 주세요</small></p>
+        <p class="q">몇 년생이에요?<small>숫자 4개로 써 주세요 (1986~2007년생 청년만 신청할 수 있어요)</small></p>
         <input class="inp" name="birth" inputmode="numeric" pattern="[0-9]*" placeholder="예) 2001" maxlength="4">
       </div>
 
@@ -382,33 +383,45 @@ footer b{color:var(--ink)}
       </div>
 
       <div class="step" data-k="help">
-        <p class="q">우리가 미리 알면 좋은 게 있어요?<small>없으면 비워 두고 "다음"을 눌러요</small></p>
+        <p class="q">도움이 필요한 점이 있어요?<small>없으면 비워 두고 "다음"을 눌러요 (선택)</small></p>
         <textarea class="inp" name="help" placeholder="예) 시끄러운 곳이 힘들어요&#10;예) 역에서 길 찾는 게 어려워요" maxlength="300"></textarea>
       </div>
 
-      <div class="step" data-k="photo">
-        <p class="q">사진·영상 촬영에 동의해 주세요 📸<small>파티 모습을 사진과 영상으로 남겨요</small></p>
+      <div class="step" data-k="photo" data-type="one">
+        <p class="q">사진·영상에 나와도 괜찮아요? 📸<small>동의하지 않아도 파티에 올 수 있어요</small></p>
         <div class="agree" style="font-size:15px">
-          <b>사진·영상은 이렇게 써요</b><br>
           · 찍는 것: 파티 중 사진과 영상 (얼굴이 나올 수 있어요)<br>
           · 쓰는 곳: 슬로코치·노원 유센터의 SNS, 홈페이지, 활동 보고서, 홍보물<br>
-          · 기간: 동의를 그만두고 싶다고 말할 때까지<br>
-          · 그만두고 싶으면 언제든 문자로 말해 주세요. 그때부터 새로 쓰지 않고, 올린 글에서도 내려요.
+          · 기간: 2027년 12월 31일까지 새로 쓸 수 있어요<br>
+          · 그만두고 싶으면 언제든 메일(samuel918@slowcoach.kr)로 말해 주세요. 우리가 올린 글에서 내려요. 이미 인쇄한 홍보물은 거둬들이기 어려울 수 있어요.<br>
+          · "아니요"를 고르면 이름표에 표시해서 사진에서 빼 드려요.
         </div>
-        <label class="check"><input type="checkbox" name="photoOk"> 네, 사진·영상 촬영과 사용에 동의해요</label>
+        <div class="opts">
+          <button type="button" class="opt" data-v="yes"><span class="e">😄</span>네, 괜찮아요</button>
+          <button type="button" class="opt" data-v="no"><span class="e">🙈</span>아니요, 빼 주세요</button>
+        </div>
       </div>
 
       <div class="step" data-k="agree">
         <p class="q">마지막! 확인해 주세요 ✅</p>
         <div class="summary" id="summary"></div>
         <div class="agree">
-          <b>개인정보를 이렇게 써요</b><br>
-          · 받는 것: 이름, 태어난 해, 휴대폰 번호, 신청서에 쓴 내용<br>
-          · 쓰는 곳: 참가 확인, 안내 문자, 이름표, 저녁 준비<br>
-          · 보관: 파티가 끝나고 1달 뒤(2027년 1월 24일)에 지워요<br>
-          · 동의하지 않을 수 있어요. 다만 그러면 신청할 수 없어요.
+          <b>개인정보를 이렇게 써요 (필수)</b><br>
+          · 받는 곳: 주식회사 슬로코치 (문의 samuel918@slowcoach.kr)<br>
+          · 받는 것: 이름, 태어난 해, 휴대폰 번호, 알게 된 곳, 같이 오는 사람, 하고 싶은 것, 좋아하는 것, 사진 동의 여부<br>
+          · 쓰는 곳: 참가 확인, 안내 연락(문자·카카오톡), 이름표, 파티 준비<br>
+          · 보관: 구글 스프레드시트에 저장하고, 2027년 1월 24일에 모두 지워요<br>
+          · 슬로코치만 보관해요. 다른 곳에 줘야 하면 따로 물어볼게요<br>
+          · 언제든 보기·고치기·지우기를 메일로 요청할 수 있어요<br>
+          · 동의하지 않으면 신청할 수 없어요 (파티 운영에 꼭 필요한 내용이에요)
         </div>
-        <label class="check"><input type="checkbox" name="agree"> 네, 동의해요</label>
+        <label class="check"><input type="checkbox" name="agree"> 네, 개인정보 수집·이용에 동의해요</label>
+        <div id="healthBox" style="display:none">
+          <div class="agree"><b>건강 관련 내용 (못 먹는 음식·도움이 필요한 점)</b><br>
+          · 저녁 준비와 현장 도움에만 쓰고, 2027년 1월 24일에 함께 지워요<br>
+          · 동의하지 않으면 이전 단계에서 그 칸을 비우면 돼요</div>
+          <label class="check"><input type="checkbox" name="healthOk"> 네, 건강 관련 내용 사용에 동의해요</label>
+        </div>
       </div>
 
       </div>
@@ -427,7 +440,7 @@ footer b{color:var(--ink)}
         <p>🏦 보낼 곳</p>
         <p class="acc">우리은행 1005-704-966197</p>
         <p>받는 사람: 주식회사 슬로코치</p>
-        <p style="margin-top:8px">✍️ 보내는 사람 이름: <b id="payName">신청한 이름</b></p>
+        <p style="margin-top:8px">✍️ 보내는 사람 이름: <b id="payName">이름+번호 뒷4자리</b><br><span style="font-size:14px">(예: 김슬로5678 — 이렇게 보내야 누가 보냈는지 알 수 있어요)</span></p>
         <p style="margin-top:4px">⏰ 신청하고 <b>3일 안에</b> 보내 주세요</p>
         <button class="copy" id="copyBtn">📋 계좌번호 복사하기</button>
       </div>
@@ -450,113 +463,6 @@ footer b{color:var(--ink)}
 
 <a href="#apply" class="btn red fab hide" id="fab">🎁 파티 신청하기</a>
 
-<script>
-// ===== 설정 =====
-const store={get:(s,k)=>{try{return window[s].getItem(k)}catch(e){return null}},set:(s,k,v)=>{try{window[s].setItem(k,v)}catch(e){}}};
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbwS7dwSfSJ-BpRTm6Ud2bkv1hfwbuPlDJlyzhqsNDm247QHKpyj3dcRNsqaJdQxVlE4zQ/exec"; // 신청 → 회사 구글시트
-const EVENT = new Date("2026-12-24T18:00:00+09:00");
-
-// D-day
-(function(){
-  const now = new Date();
-  const kst = d => new Date(d.toLocaleString("en-US",{timeZone:"Asia/Seoul"}));
-  const a = kst(now); a.setHours(0,0,0,0);
-  const b = kst(EVENT); b.setHours(0,0,0,0);
-  const d = Math.round((b-a)/86400000);
-  document.getElementById("dday").textContent = d>0 ? "D-"+d : d===0 ? "D-DAY" : "끝!";
-})();
-
-// 눈
-(function(){
-  const s=document.getElementById("snow");
-  for(let i=0;i<22;i++){const e=document.createElement("i");const z=6+Math.random()*10;
-    e.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${7+Math.random()*9}s;animation-delay:${-Math.random()*12}s;background:${["#fff","#fff","#FFD23F","#FF4B3E","#2FBF71"][i%5]}`;s.appendChild(e);}
-})();
-
-// 색종이
-const cv=document.getElementById("confetti"),cx=cv.getContext("2d");let parts=[];
-function confetti(n=140){cv.width=innerWidth;cv.height=innerHeight;
-  const cols=["#FF4B3E","#FFD23F","#3FA7FF","#2FBF71","#FFB3C7"];
-  for(let i=0;i<n;i++)parts.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,r:6+Math.random()*7,c:cols[i%5],a:Math.random()*6,t:0});
-  if(parts.length===n)requestAnimationFrame(tick);}
-function tick(){cx.clearRect(0,0,cv.width,cv.height);
-  parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.a+=.15;p.t++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.strokeStyle="#1B1B1B";cx.lineWidth=2;cx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);cx.strokeRect(-p.r/2,-p.r/2,p.r,p.r*1.4);cx.restore();});
-  parts=parts.filter(p=>p.y<cv.height+40&&p.t<220); if(parts.length)requestAnimationFrame(tick); else cx.clearRect(0,0,cv.width,cv.height);}
-
-
-// ===== 배경 음악 (Pixabay 무료 음원: Jingle Bells by HitsLab, 상업 사용 무료) =====
-const Music=(()=>{const a=new Audio("music.mp3");a.loop=true;a.preload="auto";a.volume=0;let on=false,fadeT;
-  function fade(to){clearInterval(fadeT);fadeT=setInterval(()=>{const v=a.volume+(to>a.volume?.05:-.05);a.volume=Math.max(0,Math.min(.6,v));if(Math.abs(a.volume-to)<.06){a.volume=to;clearInterval(fadeT);if(to===0)a.pause();}},60);}
-  function start(){const p=a.play();on=true;ui();fade(.55);if(p&&p.catch)p.catch(()=>{on=false;ui();});}
-  function stop(){on=false;ui();fade(0);}
-  function ui(){const b=document.getElementById("musicBtn");if(!b)return;b.textContent=on?"🎵":"🔇";b.setAttribute("aria-label",on?"음악 끄기":"음악 켜기");b.classList.toggle("off",!on);}
-  return{start,stop,toggle(){on?stop():start();},get on(){return on}};})();
-const wantMusic=()=>store.get("localStorage","sc_music")!=="0";
-document.getElementById("musicBtn").onclick=(e)=>{e.stopPropagation();Music.toggle();store.set("localStorage","sc_music",Music.on?"1":"0");};
-// 처음부터: 열리자마자 재생 시도 → 막히면 첫 터치·클릭·스크롤 때 바로 재생
-if(wantMusic()) Music.start();
-const kick=()=>{ if(wantMusic() && !Music.on) Music.start(); ["pointerdown","touchstart","keydown","scroll"].forEach(ev=>removeEventListener(ev,kick,true)); };
-["pointerdown","touchstart","keydown","scroll"].forEach(ev=>addEventListener(ev,kick,{capture:true,passive:true}));
-
-// 초대장 열기
-const intro=document.getElementById("intro");
-function openIntro(fx){ if(wantMusic() && !Music.on) Music.start(); if(fx){document.querySelector(".env .flap").style.transform="rotateX(180deg)";confetti(110);} setTimeout(()=>intro.classList.add("gone"),fx?550:0); store.set("sessionStorage","opened","1"); }
-document.getElementById("openBtn").onclick=()=>openIntro(true);
-document.getElementById("env").onclick=()=>openIntro(true);
-document.getElementById("skipBtn").onclick=()=>openIntro(false);
-if(store.get("sessionStorage","opened")||location.hash==="#apply") intro.classList.add("gone");
-
-// 떠 있는 신청 버튼
-const fab=document.getElementById("fab"),applyEl=document.getElementById("apply");
-addEventListener("scroll",()=>{const r=applyEl.getBoundingClientRect();fab.classList.toggle("hide",scrollY<420||r.top<innerHeight*.9);},{passive:true});
-
-// ===== 신청서 =====
-const steps=[...document.querySelectorAll(".step")],form=document.getElementById("form"),err=document.getElementById("err");
-const prog=document.getElementById("prog");steps.forEach(()=>prog.appendChild(document.createElement("i")));
-let cur=0;const data={};
-function show(i){steps.forEach((s,j)=>s.classList.toggle("on",j===i));[...prog.children].forEach((p,j)=>p.classList.toggle("on",j<=i));
-  document.getElementById("back").style.visibility=i?"visible":"hidden";
-  document.getElementById("next").textContent=i===steps.length-1?"🎁 신청하기":"다음 →"; err.textContent="";
-  if(steps[i].dataset.k==="agree")renderSummary();
-  const f=steps[i].querySelector("input.inp,textarea.inp"); }
-document.querySelectorAll(".step[data-type]").forEach(st=>{const many=st.dataset.type==="many";
-  st.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ if(!many)st.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel")); b.classList.toggle("sel");
-    if(st.dataset.k==="food"){const t=form.foodText;t.style.display=b.dataset.v==="있어요"&&b.classList.contains("sel")?"block":"none";}
-    if(!many && st.dataset.k!=="food") setTimeout(()=>go(1),220); });});
-const sel=k=>[...document.querySelectorAll(`.step[data-k="${k}"] .opt.sel`)].map(b=>b.dataset.v);
-form.phone.addEventListener("input",e=>{let v=e.target.value.replace(/\D/g,"").slice(0,11);e.target.value=v.length>7?v.replace(/(\d{3})(\d{4})(\d+)/,"$1-$2-$3"):v.length>3?v.replace(/(\d{3})(\d+)/,"$1-$2"):v;});
-function check(k){
-  if(k==="name"&&form.uname.value.trim().length<2)return"이름을 써 주세요 🙂";
-  if(k==="birth"){const y=+form.birth.value;if(!(y>=1970&&y<=2012))return"태어난 해를 숫자 4개로 써 주세요 (예: 2001)";}
-  if(k==="phone"&&!/^01\d-?\d{3,4}-?\d{4}$/.test(form.phone.value))return"휴대폰 번호를 다시 확인해 주세요";
-  if(k==="photo"&&!form.photoOk.checked)return"사진·영상 동의에 체크해 주세요 📸";
-  if(["from","with","food"].includes(k)&&!sel(k).length)return"하나를 골라 주세요 👆";
-  if(k==="food"&&sel(k)[0]==="있어요"&&!form.foodText.value.trim())return"못 먹는 음식을 써 주세요";
-  if(k==="wish"&&!sel(k).length&&!form.wishText.value.trim())return"하고 싶은 걸 하나 이상 골라 주세요 ✨";
-  if(k==="agree"&&!form.agree.checked)return"동의에 체크해 주세요 ✅";
-  return"";}
-function collect(){return{name:form.uname.value.trim(),birth:form.birth.value.trim(),phone:form.phone.value.trim(),from:sel("from").join(", "),with:sel("with").join(", "),
-  wish:sel("wish").join(", "),wishText:form.wishText.value.trim(),likes:form.likes.value.trim(),food:sel("food")[0]==="있어요"?form.foodText.value.trim():"없음",
-  help:form.help.value.trim(),photo:form.photoOk.checked?"동의":"미동의",agree:"동의",ua:navigator.userAgent.slice(0,120)};}
-function renderSummary(){const d=collect();document.getElementById("summary").innerHTML=
-  [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish,d.wishText].filter(Boolean).join(" / ")]].map(([a,b])=>`<div>✔ ${a}: <b>${(b||"-").replace(/</g,"&lt;")}</b></div>`).join("");}
-async function submit(){const d=collect();const btn=document.getElementById("next");btn.disabled=true;btn.textContent="보내는 중… 🎁";
-  try{
-    const body=JSON.stringify(d);
-    try{const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});const j=await r.json();if(!j.ok)throw new Error("server");}
-    catch(e1){ if(e1.message==="server")throw e1; await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body}); }
-    store.set("localStorage","sc2026_applied",d.name);
-    document.getElementById("payName").textContent=d.name;
-    form.style.display="none";document.getElementById("done").style.display="block";
-    document.getElementById("apply").scrollIntoView({behavior:"smooth"});confetti(170);
-  }catch(e){err.textContent="앗, 전송이 안 됐어요. 인터넷을 확인하고 다시 눌러 주세요.";btn.disabled=false;btn.textContent="🎁 신청하기";}}
-function go(dir){ if(dir>0){const m=check(steps[cur].dataset.k);if(m){err.textContent=m;return;} if(cur===steps.length-1)return submit();}
-  cur=Math.max(0,Math.min(steps.length-1,cur+dir));show(cur);
-  const r=form.getBoundingClientRect(); if(r.top<-40) form.scrollIntoView({block:"start"});}
-document.getElementById("next").onclick=()=>go(1);document.getElementById("back").onclick=()=>go(-1);
-form.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT"){e.preventDefault();go(1);}});
-document.getElementById("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText("우리은행 1005704966197");document.getElementById("copyBtn").textContent="✅ 복사됐어요!";}catch(e){document.getElementById("copyBtn").textContent="1005-704-966197";}};
-show(0);
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
