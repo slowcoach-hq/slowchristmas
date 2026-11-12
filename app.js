@@ -76,12 +76,14 @@ const sel=k=>[...document.querySelectorAll(`.step[data-k="${k}"] .opt.sel`)].map
 form.phone.addEventListener("input",e=>{let v=e.target.value.replace(/\D/g,"").slice(0,11);e.target.value=v.length>7?v.replace(/(\d{3})(\d{4})(\d+)/,"$1-$2-$3"):v.length>3?v.replace(/(\d{3})(\d+)/,"$1-$2"):v;});
 function check(k){
   if(k==="name"&&form.uname.value.trim().length<2)return"이름을 써 주세요 🙂";
-  if(k==="birth"){const y=+form.birth.value;if(!/^\d{4}$/.test(form.birth.value))return"태어난 해를 숫자 4개로 써 주세요 (예: 2001)";if(y<1986||y>2007)return"1986~2007년생 청년만 신청할 수 있어요 🙏";}
+  if(k==="birth"){const y=+form.birth.value;if(!/^\d{4}$/.test(form.birth.value))return"태어난 해를 숫자 4개로 써 주세요 (예: 2001)";if(y<1950||y>2007)return"태어난 해를 다시 확인해 주세요 🙏";}
   if(k==="phone"&&!/^010-?\d{4}-?\d{4}$/.test(form.phone.value))return"010으로 시작하는 휴대폰 번호를 써 주세요";
   if(["from","with","food","photo"].includes(k)&&!sel(k).length)return"하나를 골라 주세요 👆";
   if(k==="food"&&sel(k)[0]==="있어요"&&!form.foodText.value.trim())return"못 먹는 음식을 써 주세요";
   if(k==="wish"&&!sel(k).length&&!form.wishText.value.trim())return"하고 싶은 걸 하나 이상 골라 주세요 ✨";
   if(k==="agree"&&!form.agree.checked)return"개인정보 동의에 체크해 주세요 ✅";
+  if(k==="agree"&&!form.share.checked)return"유센터 명단 동의에 체크해 주세요 ✅";
+  if(k==="pay"&&!sel("pay").length)return"하나를 골라 주세요";
   if(k==="agree"&&needHealth()&&!form.healthOk.checked)return"건강 관련 내용 동의에 체크해 주세요 (싫으면 이전 단계에서 그 칸을 비워 주세요)";
   return"";}
 const foodVal=()=>sel("food")[0]==="있어요"?form.foodText.value.trim():"";
@@ -90,11 +92,11 @@ const t0=Date.now();
 const rid=(()=>{let r=store.get("sessionStorage","sc_rid");if(!r){const a=new Uint8Array(16);crypto.getRandomValues(a);r=[...a].map(x=>x.toString(16).padStart(2,"0")).join("");store.set("sessionStorage","sc_rid",r);}return r;})();
 function collect(){return{rid,ms:Date.now()-t0,tp:form.tp.value,name:form.uname.value.trim(),birth:form.birth.value.trim(),phone:form.phone.value.trim(),from:sel("from")[0]||"",with:sel("with")[0]||"",
   wish:sel("wish"),wishText:form.wishText.value.trim(),likes:form.likes.value.trim(),food:foodVal(),
-  help:form.help.value.trim(),photo:sel("photo")[0]==="yes",agree:form.agree.checked===true,health:needHealth()?form.healthOk.checked===true:false};}
+  help:form.help.value.trim(),photo:sel("photo")[0]==="yes",agree:form.agree.checked===true,health:needHealth()?form.healthOk.checked===true:false,pay:sel("pay")[0]||"",share:form.share.checked===true};}
 function renderSummary(){const d=collect();const box=document.getElementById("summary");box.textContent="";
-  [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish.join(", "),d.wishText].filter(Boolean).join(" / ")],["사진·홍보",d.photo?"동의":"사진에서 빼 주세요"]].forEach(([a,b])=>{const div=document.createElement("div");div.append("✔ "+a+": ");const bb=document.createElement("b");bb.textContent=b||"-";div.append(bb);box.append(div);});
+  [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish.join(", "),d.wishText].filter(Boolean).join(" / ")],["참가비",{self:"내가 계좌로",proxy:"가족·선생님이 대신 계좌로",cash:"파티 날 현금"}[d.pay]],["사진·홍보",d.photo?"동의":"사진에서 빼 주세요"]].forEach(([a,b])=>{const div=document.createElement("div");div.append("✔ "+a+": ");const bb=document.createElement("b");bb.textContent=b||"-";div.append(bb);box.append(div);});
   document.getElementById("healthBox").style.display=needHealth()?"block":"none";}
-const ERR={INVALID_BIRTH:"1986~2007년생 청년만 신청할 수 있어요.",INVALID_PHONE:"휴대폰 번호를 다시 확인해 주세요.",INVALID_CONSENT:"동의 칸을 다시 확인해 주세요.",BUSY:"지금 신청이 몰렸어요. 1분 뒤에 다시 눌러 주세요.",CLOSED:"신청이 마감됐어요. 고마워요!",BOT:"조금 천천히 다시 눌러 주세요.",TOO_LARGE:"글이 너무 길어요. 조금 줄여 주세요."};
+const ERR={INVALID_BIRTH:"태어난 해를 다시 확인해 주세요.",INVALID_PHONE:"휴대폰 번호를 다시 확인해 주세요.",INVALID_CONSENT:"동의 칸을 다시 확인해 주세요.",BUSY:"지금 신청이 몰렸어요. 1분 뒤에 다시 눌러 주세요.",CLOSED:"신청이 마감됐어요. 고마워요!",BOT:"조금 천천히 다시 눌러 주세요.",TOO_LARGE:"글이 너무 길어요. 조금 줄여 주세요."};
 function lockForm(on){ form.querySelectorAll("button,input,textarea").forEach(x=>{ if(x.id!=="next") x.disabled=on; }); }
 async function submit(){ if(submitting)return; submitting=true; clearTimeout(advT);
   const d=collect();const btn=document.getElementById("next");btn.disabled=true;btn.textContent="보내는 중… 🎁";lockForm(true);
@@ -104,6 +106,8 @@ async function submit(){ if(submitting)return; submitting=true; clearTimeout(adv
   if(j&&j.ok){
     err.textContent="";
     document.getElementById("payName").textContent=d.name+d.phone.replace(/\D/g,"").slice(-4);
+    if(d.pay==="proxy"){ const p=document.createElement("p"); p.style.cssText="margin-top:6px;font-size:14px"; p.textContent="대신 보내 주는 분께 이 계좌와 보내는 사람 이름을 꼭 알려 주세요."; document.getElementById("payBox").appendChild(p); }
+    if(d.pay==="cash"){ document.getElementById("payBox").style.display="none"; document.getElementById("cashBox").style.display="block"; document.getElementById("doneMsg").textContent="신청이 끝났어요! 12월 초에 문자로 다시 알려 드릴게요. 12월 24일에 만나요! 🎄"; }
     form.style.display="none";document.getElementById("done").style.display="block";
     document.getElementById("apply").scrollIntoView({behavior:"smooth"});confetti(170);
     store.set("sessionStorage","sc_rid","");
