@@ -58,6 +58,17 @@ a{color:inherit}.btn{text-decoration:none;display:flex;align-items:center;justif
 .btn.red{background:var(--red);color:#fff;text-shadow:2px 2px 0 var(--ink)}
 .btn.white{background:#fff}
 .btn[disabled]{opacity:.45;pointer-events:none}
+.hero .cta+.cta{margin-top:12px}
+.close-soon{margin-top:16px;display:inline-block;background:var(--red);color:#fff;font-weight:900;font-size:18px;padding:8px 14px;border:4px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink)}
+.wish-live{margin-top:16px;padding:20px;background:#fff}
+.wish-live .wl-title{font-size:20px;font-weight:900}
+.wish-live .wl-sub{font-size:15px;font-weight:700;color:#555;margin-top:6px}
+.wish-live ol{list-style:none;margin:12px 0 4px;padding:0;display:grid;gap:8px}
+.wish-live li{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900;border:3px solid var(--ink);border-radius:14px;padding:10px 12px;background:var(--cream)}
+.wish-live li .rk{background:var(--ink);color:var(--yellow);border-radius:10px;padding:2px 9px;font-size:16px}
+.share-box{margin-top:18px;padding:16px;border:4px dashed var(--ink);border-radius:18px;background:var(--cream)}
+.share-box .sb-title{font-size:20px;font-weight:900}
+.share-box .sb-sub{font-size:15px;font-weight:700;color:#444;margin-top:6px}
 
 /* ---------- logo lockup ---------- */
 .lockup{display:inline-flex;align-items:center;gap:12px;background:#fff;border:4px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:8px 14px}
@@ -230,7 +241,9 @@ footer b{color:var(--ink)}
     </div>
 
     <div class="dday"><span class="num" id="dday">D-?</span><span class="txt">크리스마스이브 파티까지 🎅</span></div>
+    <p class="close-soon" id="closeSoon" hidden></p>
     <div class="cta"><a href="#apply" class="btn red">🎁 파티 신청하기</a></div>
+    <div class="cta"><button type="button" class="btn white share-btn">🤝 친구한테 알려 주기</button></div>
   </section>
 
   <!-- INFO -->
@@ -266,6 +279,12 @@ footer b{color:var(--ink)}
       <p style="font-size:21px;font-weight:900;line-height:1.4">신청서에 "하고 싶은 것"을 적어 주세요!</p>
       <p style="font-size:17px;font-weight:700;margin-top:8px">많이 나온 걸로 파티를 꾸미고,<br>순서는 12월 초에 문자로 알려 드려요. 📱</p>
       <a href="#apply" class="btn white" style="margin-top:16px;min-height:58px;font-size:20px">✏️ 하고 싶은 거 적으러 가기</a>
+    </div>
+    <div class="sticker wish-live" id="wishLive" hidden>
+      <p class="wl-title">📊 지금까지 친구들이 고른 것</p>
+      <p class="wl-sub" id="wishCount"></p>
+      <ol id="wishList"></ol>
+      <p class="wl-sub">신청할 때마다 바뀌어요. 너의 한 표도 보태 줘!</p>
     </div>
   </section>
 
@@ -464,6 +483,11 @@ footer b{color:var(--ink)}
         <p style="font-size:14px;margin-top:6px">거스름돈이 없을 수 있어요. 5천 원짜리나 천 원짜리로 가져와 주세요.</p>
       </div>
       <p style="font-size:16px;font-weight:700;margin-top:16px;color:#444" id="doneMsg">돈을 보내면 확인 문자를 보내 드려요.<br>12월 24일에 만나요! 🎄</p>
+      <div class="share-box">
+        <p class="sb-title">🤝 친구도 같이 와요!</p>
+        <p class="sb-sub">혼자보다 같이 오면 더 재밌어요. 친구도 이 페이지에서 따로 신청하면 돼요.</p>
+        <button type="button" class="btn red share-btn" style="margin-top:12px;min-height:60px;font-size:20px">📤 친구한테 알려 주기</button>
+      </div>
     </div>
   </section>
 

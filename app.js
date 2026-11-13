@@ -125,3 +125,36 @@ document.getElementById("copyBtn").onclick=async()=>{try{await navigator.clipboa
 try{localStorage.removeItem("sc2026_applied");}catch(e){}
 if(Date.now()>new Date("2026-12-21T23:59:59+09:00").getTime()){ form.style.display="none"; const c=document.createElement("p"); c.className="q"; c.style.cssText="padding:24px;text-align:center"; c.textContent="신청이 마감됐어요. 고마워요! 🎄"; form.parentNode.insertBefore(c,form); }
 show(0);
+
+// ===== 친구한테 알리기 =====
+const SHARE_URL="https://slowchristmas.vercel.app";
+const SHARE_TEXT="12월 24일 크리스마스이브에 같이 놀자! 🎄 경계선지능 청년 크리스마스 파티 (역삼 MARU180, 저녁 6시~9시). 혼자 와도 괜찮아요. 신청은 여기서:";
+document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",async()=>{
+  const old=b.textContent;
+  try{ if(navigator.share){ await navigator.share({title:"Slow Christmas 2026",text:SHARE_TEXT,url:SHARE_URL}); return; } }catch(e){ if(e&&e.name==="AbortError") return; }
+  try{ await navigator.clipboard.writeText(SHARE_TEXT+" "+SHARE_URL); b.textContent="✅ 복사됐어요! 카톡에 붙여 넣어 보내요"; }
+  catch(e){ b.textContent="링크: slowchristmas.vercel.app"; }
+  setTimeout(()=>{b.textContent=old;},3500);
+}));
+
+// ===== 곧 마감 =====
+(function(){
+  const kst=d=>new Date(d.toLocaleString("en-US",{timeZone:"Asia/Seoul"}));
+  const a=kst(new Date()); a.setHours(0,0,0,0);
+  const c=kst(new Date("2026-12-21T12:00:00+09:00")); c.setHours(0,0,0,0);
+  const d=Math.round((c-a)/86400000);
+  if(d>=0&&d<=7){ const el=document.getElementById("closeSoon"); el.textContent= d===0 ? "⏰ 오늘 신청 마감이에요!" : "⏰ 신청 마감까지 "+d+"일!"; el.hidden=false; }
+})();
+
+// ===== 친구들이 고른 것 =====
+(async function(){
+  const EMO={"새 친구 사귀기":"🤝","맛있는 거 먹기":"🍕","게임":"🎲","선물 교환":"🎁","노래·춤":"🎤","사진 찍기":"📸","공연 보기":"🎭","이야기 나누기":"💬"};
+  try{
+    const r=await fetch(ENDPOINT+"?a=wish"); const j=await r.json();
+    if(!j||!j.ok||!Array.isArray(j.top)||!j.top.length) return;
+    const ol=document.getElementById("wishList");
+    j.top.slice(0,3).forEach((w,i)=>{ if(!EMO[w]) return; const li=document.createElement("li"); const s=document.createElement("span"); s.className="rk"; s.textContent=(i+1)+"위"; li.append(s, " "+EMO[w]+" "+w); ol.append(li); });
+    if(j.n10) document.getElementById("wishCount").textContent="벌써 "+j.n10+"명 넘게 신청했어요!";
+    if(ol.children.length) document.getElementById("wishLive").hidden=false;
+  }catch(e){}
+})();
