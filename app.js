@@ -175,6 +175,7 @@ document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",as
       $("socialLine").textContent="🙌 벌써 "+j.n10+"명 넘게 같이 가요"+(typeof j.alonePct==="number"&&j.alonePct>=20?" · 혼자 오는 친구가 "+j.alonePct+"%예요":"");
       $("socialLine").hidden=false;
     }
+    if((j.n10&&j.n10>=20)||(j.today&&j.today>=50)||(j.recent10&&j.recent10>=10)) $("hotBadge").hidden=false;
     if(j.recent10) { $("viewLine").textContent="👀 지금 "+j.recent10+"명이 이 파티를 구경하고 있어요 (최근 10분)"; $("viewLine").hidden=false; }
     else if(j.today) { $("viewLine").textContent="👀 오늘 "+j.today+"명이 이 파티를 구경했어요"; $("viewLine").hidden=false; }
     else if(j.week) { $("viewLine").textContent="👀 이번 주에 "+j.week+"명이 이 파티를 구경했어요"; $("viewLine").hidden=false; }
