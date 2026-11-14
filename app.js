@@ -106,8 +106,9 @@ async function submit(){ if(submitting)return; submitting=true; clearTimeout(adv
   if(j&&j.ok){
     err.textContent="";
     document.getElementById("payName").textContent=d.name+d.phone.replace(/\D/g,"").slice(-4);
-    if(d.pay==="proxy"){ const p=document.createElement("p"); p.style.cssText="margin-top:6px;font-size:14px"; p.textContent="대신 보내 주는 분께 이 계좌와 보내는 사람 이름을 꼭 알려 주세요."; document.getElementById("payBox").appendChild(p); }
-    if(d.pay==="cash"){ document.getElementById("payBox").style.display="none"; document.getElementById("doneTitle").textContent="신청 끝!"; document.getElementById("doneSub").textContent="참가비는 파티 날 현금으로 내면 돼요."; document.getElementById("cashBox").style.display="block"; document.getElementById("doneMsg").textContent="신청이 끝났어요! 12월 초에 문자로 다시 알려 드릴게요. 12월 24일에 만나요! 🎄"; }
+    if(j.wait){ document.getElementById("payBox").style.display="none"; document.getElementById("cashBox").style.display="none"; document.getElementById("waitBox").style.display="block"; document.getElementById("doneTitle").textContent="대기 신청 끝!"; document.getElementById("doneSub").textContent="자리가 나면 연락드릴게요."; document.getElementById("doneMsg").textContent="고마워요! 🎄"; }
+    else if(d.pay==="proxy"){ const p=document.createElement("p"); p.style.cssText="margin-top:6px;font-size:14px"; p.textContent="대신 보내 주는 분께 이 계좌와 보내는 사람 이름을 꼭 알려 주세요."; document.getElementById("payBox").appendChild(p); }
+    if(!j.wait&&d.pay==="cash"){ document.getElementById("payBox").style.display="none"; document.getElementById("doneTitle").textContent="신청 끝!"; document.getElementById("doneSub").textContent="참가비는 파티 날 현금으로 내면 돼요."; document.getElementById("cashBox").style.display="block"; document.getElementById("doneMsg").textContent="신청이 끝났어요! 12월 초에 문자로 다시 알려 드릴게요. 12월 24일에 만나요! 🎄"; }
     form.style.display="none";document.getElementById("done").style.display="block";
     document.getElementById("apply").scrollIntoView({behavior:"smooth"});confetti(170);
     store.set("sessionStorage","sc_rid","");
@@ -146,15 +147,35 @@ document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",as
   if(d>=0&&d<=7){ const el=document.getElementById("closeSoon"); el.textContent= d===0 ? "⏰ 오늘 신청 마감이에요!" : "⏰ 신청 마감까지 "+d+"일!"; el.hidden=false; }
 })();
 
-// ===== 친구들이 고른 것 =====
+// ===== 친구들이 고른 것 · 자리 현황 =====
 (async function(){
   const EMO={"새 친구 사귀기":"🤝","맛있는 거 먹기":"🍕","게임":"🎲","선물 교환":"🎁","노래·춤":"🎤","사진 찍기":"📸","공연 보기":"🎭","이야기 나누기":"💬"};
   try{
     const r=await fetch(ENDPOINT+"?a=wish"); const j=await r.json();
-    if(!j||!j.ok||!Array.isArray(j.top)||!j.top.length) return;
-    const ol=document.getElementById("wishList");
-    j.top.slice(0,3).forEach((w,i)=>{ if(!EMO[w]) return; const li=document.createElement("li"); const s=document.createElement("span"); s.className="rk"; s.textContent=(i+1)+"위"; li.append(s, " "+EMO[w]+" "+w); ol.append(li); });
-    if(j.n10) document.getElementById("wishCount").textContent="벌써 "+j.n10+"명 넘게 신청했어요!";
-    if(ol.children.length) document.getElementById("wishLive").hidden=false;
+    if(!j||!j.ok) return;
+    const $=id=>document.getElementById(id);
+    if(Array.isArray(j.top)&&j.top.length){
+      const ol=$("wishList");
+      j.top.slice(0,3).forEach((w,i)=>{ if(!EMO[w]) return; const li=document.createElement("li"); const s=document.createElement("span"); s.className="rk"; s.textContent=(i+1)+"위"; li.append(s, " "+EMO[w]+" "+w); ol.append(li); });
+      if(ol.children.length) $("wishLive").hidden=false;
+    }
+    if(j.n10){
+      $("wishCount").textContent="벌써 "+j.n10+"명 넘게 신청했어요!";
+      $("socialLine").textContent="🙌 벌써 "+j.n10+"명 넘게 같이 가요"+(typeof j.alonePct==="number"&&j.alonePct>=20?" · 혼자 오는 친구가 "+j.alonePct+"%예요":"");
+      $("socialLine").hidden=false;
+    }
+    if(j.round===1&&j.left>0){ $("kitLeft").textContent="트리 장식 키트 "+j.left+"개 남았어요"; $("kitLeft").hidden=false; }
+    if(j.round===2&&!j.full){ $("kitTitle").textContent="🎉 1차 50자리가 다 찼어요! 2차 50자리를 열었어요"; $("kitSub").textContent="지금 신청해도 같이 놀 수 있어요."; if(j.left>0){ $("kitLeft").textContent="남은 자리 "+j.left+"개"; $("kitLeft").hidden=false; } }
+    if(j.full){ $("kitTitle").textContent="🙏 자리가 다 찼어요"; $("kitSub").textContent="지금은 대기 신청을 받아요. 자리가 나면 먼저 연락드릴게요."; const nb=document.getElementById("next"); if(nb) nb.dataset.wait="1"; }
   }catch(e){}
+})();
+
+// ===== 달력에 넣기 =====
+(function(){
+  const g="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent("Slow Christmas 2026 🎄")+"&dates=20261224T090000Z/20261224T120000Z&ctz=Asia/Seoul&location="+encodeURIComponent("MARU180 지하 1층 (서울 강남구 역삼로 180, 역삼역 2번 출구 도보 7분)")+"&details="+encodeURIComponent("경계선지능 청년 크리스마스 파티 · 저녁 6시~9시 · https://slowchristmas.vercel.app");
+  const gb=document.getElementById("gcalBtn"); if(gb) gb.href=g;
+  const ib=document.getElementById("icsBtn"); if(ib) ib.addEventListener("click",()=>{
+    const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//slowcoach//slowchristmas//KO","BEGIN:VEVENT","UID:slowchristmas-2026@slowcoach.kr","DTSTAMP:20261113T000000Z","DTSTART:20261224T090000Z","DTEND:20261224T120000Z","SUMMARY:Slow Christmas 2026 🎄","LOCATION:MARU180 지하 1층 (역삼역 2번 출구 도보 7분)","DESCRIPTION:경계선지능 청년 크리스마스 파티 · 저녁 6시~9시 · https://slowchristmas.vercel.app","BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:내일은 슬로 크리스마스!","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([ics],{type:"text/calendar"})); a.download="slowchristmas.ics"; document.body.append(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);
+  });
 })();
