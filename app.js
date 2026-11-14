@@ -147,6 +147,17 @@ document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",as
   if(d>=0&&d<=7){ const el=document.getElementById("closeSoon"); el.textContent= d===0 ? "⏰ 오늘 신청 마감이에요!" : "⏰ 신청 마감까지 "+d+"일!"; el.hidden=false; }
 })();
 
+// ===== 방문 기록 (하루 1번, 개인정보 없음) =====
+(function(){
+  try{
+    const day=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Seoul"});
+    if(store.get("localStorage","sc_v_day")===day) return;
+    let id=store.get("localStorage","sc_vid"); if(!id||!/^[a-f0-9]{16}$/.test(id)){ const a=new Uint8Array(8); crypto.getRandomValues(a); id=[...a].map(x=>x.toString(16).padStart(2,"0")).join(""); store.set("localStorage","sc_vid",id); }
+    store.set("localStorage","sc_v_day",day);
+    fetch(ENDPOINT+"?a=view&v="+id).catch(()=>{});
+  }catch(e){}
+})();
+
 // ===== 친구들이 고른 것 · 자리 현황 =====
 (async function(){
   const EMO={"새 친구 사귀기":"🤝","맛있는 거 먹기":"🍕","게임":"🎲","선물 교환":"🎁","노래·춤":"🎤","사진 찍기":"📸","공연 보기":"🎭","이야기 나누기":"💬"};
@@ -164,8 +175,11 @@ document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",as
       $("socialLine").textContent="🙌 벌써 "+j.n10+"명 넘게 같이 가요"+(typeof j.alonePct==="number"&&j.alonePct>=20?" · 혼자 오는 친구가 "+j.alonePct+"%예요":"");
       $("socialLine").hidden=false;
     }
-    if(j.round===1&&j.left>0){ $("kitLeft").textContent="트리 장식 키트 "+j.left+"개 남았어요"; $("kitLeft").hidden=false; }
-    if(j.round===2&&!j.full){ $("kitTitle").textContent="🎉 1차 50자리가 다 찼어요! 2차 50자리를 열었어요"; $("kitSub").textContent="지금 신청해도 같이 놀 수 있어요."; if(j.left>0){ $("kitLeft").textContent="남은 자리 "+j.left+"개"; $("kitLeft").hidden=false; } }
+    if(j.recent10) { $("viewLine").textContent="👀 지금 "+j.recent10+"명이 이 파티를 구경하고 있어요 (최근 10분)"; $("viewLine").hidden=false; }
+    else if(j.today) { $("viewLine").textContent="👀 오늘 "+j.today+"명이 이 파티를 구경했어요"; $("viewLine").hidden=false; }
+    else if(j.week) { $("viewLine").textContent="👀 이번 주에 "+j.week+"명이 이 파티를 구경했어요"; $("viewLine").hidden=false; }
+    if(j.round===1&&j.left>0){ $("kitLeft").textContent=(j.left<=10?"거의 다 찼어요! ":"")+"트리 장식 키트 "+j.left+"개 남았어요"; $("kitLeft").hidden=false; }
+    if(j.round===2&&!j.full){ $("kitTitle").textContent="🎉 1차 50자리가 다 찼어요! 2차 50자리를 열었어요"; $("kitSub").textContent="지금 신청해도 같이 놀 수 있어요."; if(j.left>0){ $("kitLeft").textContent=(j.left<=10?"벌써 몇 자리 안 남았어요! ":"")+"남은 자리 "+j.left+"개"; $("kitLeft").hidden=false; } }
     if(j.full){ $("kitTitle").textContent="🙏 자리가 다 찼어요"; $("kitSub").textContent="지금은 대기 신청을 받아요. 자리가 나면 먼저 연락드릴게요."; const nb=document.getElementById("next"); if(nb) nb.dataset.wait="1"; }
   }catch(e){}
 })();
