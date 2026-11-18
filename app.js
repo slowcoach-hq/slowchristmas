@@ -128,13 +128,13 @@ if(Date.now()>new Date("2026-12-21T23:59:59+09:00").getTime()){ form.style.displ
 show(0);
 
 // ===== 친구한테 알리기 =====
-const SHARE_URL="https://slowchristmas.vercel.app";
+const SHARE_URL="https://slowchristmas.slowcoach.kr";
 const SHARE_TEXT="12월 24일 크리스마스이브에 같이 놀자! 🎄 경계선지능 청년 크리스마스 파티 (역삼 MARU180, 저녁 6시~9시). 혼자 와도 괜찮아요. 신청은 여기서:";
 document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",async()=>{
   const old=b.textContent;
   try{ if(navigator.share){ await navigator.share({title:"Slow Christmas 2026",text:SHARE_TEXT,url:SHARE_URL}); return; } }catch(e){ if(e&&e.name==="AbortError") return; }
   try{ await navigator.clipboard.writeText(SHARE_TEXT+" "+SHARE_URL); b.textContent="✅ 복사됐어요! 카톡에 붙여 넣어 보내요"; }
-  catch(e){ b.textContent="링크: slowchristmas.vercel.app"; }
+  catch(e){ b.textContent="링크: slowchristmas.slowcoach.kr"; }
   setTimeout(()=>{b.textContent=old;},3500);
 }));
 
@@ -180,7 +180,7 @@ document.querySelectorAll(".share-btn").forEach(b=>b.addEventListener("click",as
     else if(j.today) { $("viewLine").textContent="👀 오늘 "+j.today+"명이 이 파티를 구경했어요"; $("viewLine").hidden=false; }
     else if(j.week) { $("viewLine").textContent="👀 이번 주에 "+j.week+"명이 이 파티를 구경했어요"; $("viewLine").hidden=false; }
     if(j.round===1&&j.left>0){ $("kitLeft").textContent=(j.left<=10?"거의 다 찼어요! ":"")+"트리 장식 키트 "+j.left+"개 남았어요"; $("kitLeft").hidden=false; }
-    if(j.round===2&&!j.full){ $("kitTitle").textContent="🎉 1차 50자리가 다 찼어요! 2차 50자리를 열었어요"; $("kitSub").textContent="지금 신청해도 같이 놀 수 있어요."; if(j.left>0){ $("kitLeft").textContent=(j.left<=10?"벌써 몇 자리 안 남았어요! ":"")+"남은 자리 "+j.left+"개"; $("kitLeft").hidden=false; } }
+    if(j.round===2&&!j.full){ $("kitTitle").textContent="🎉 1차 자리가 다 찼어요! 2차 자리를 열었어요"; $("kitSub").textContent="지금 신청해도 같이 놀 수 있어요."; if(j.left>0){ $("kitLeft").textContent=(j.left<=10?"벌써 몇 자리 안 남았어요! ":"")+"남은 자리 "+j.left+"개"; $("kitLeft").hidden=false; } }
     if(j.full){ $("kitTitle").textContent="🙏 자리가 다 찼어요"; $("kitSub").textContent="지금은 대기 신청을 받아요. 자리가 나면 먼저 연락드릴게요."; const nb=document.getElementById("next"); if(nb) nb.dataset.wait="1"; }
   }catch(e){}
 })();
