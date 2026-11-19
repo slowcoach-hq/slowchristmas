@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>참가비 알려 주기 · Slow Christmas 2026</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" integrity="sha384-GIdEBaqGN9mNkDkMkzMHW8EKUqtpPIe/sLj1X7DIrnc9uPtLROJgmuDlh+3rBw0j" crossorigin="anonymous">
+<style>
+:root{--ink:#1B1B1B;--cream:#FFF1DC;--dot:#F3D9B5;--red:#FF4B3E;--yellow:#FFD23F;--mint:#9BE7B5;--sky:#8FD3FF}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;color:var(--ink);background:var(--cream);background-image:radial-gradient(var(--dot) 2.5px,transparent 3px);background-size:30px 30px;word-break:keep-all;line-height:1.5;min-height:100vh}
+.wrap{max-width:480px;margin:0 auto;padding:28px 20px 48px}
+.chip{display:inline-block;background:var(--ink);color:#fff;font-weight:900;font-size:15px;border-radius:999px;padding:6px 14px}
+h1{font-size:30px;font-weight:900;letter-spacing:-.04em;line-height:1.25;margin:14px 0 8px}
+h1 em{font-style:normal;color:var(--red)}
+.sub{font-size:17px;font-weight:700;color:#444}
+.box{background:#fff;border:5px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);padding:18px;margin-top:22px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:68px;margin-top:14px;border:5px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);font:inherit;font-size:21px;font-weight:900;cursor:pointer;color:var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink)}
+.b1{background:var(--yellow)}.b2{background:var(--mint)}.b3{background:#fff;font-size:18px;min-height:58px}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.acct{font-size:18px;font-weight:900;margin-top:4px}
+.acct small{display:block;font-size:15px;font-weight:700;color:#555;margin-top:4px}
+.msg{margin-top:18px;font-size:18px;font-weight:800;min-height:1.5em}
+.done{display:none;text-align:center}
+.done .big{font-size:64px}
+.done h2{font-size:26px;font-weight:900;margin-top:6px}
+.done p{font-size:17px;font-weight:700;color:#444;margin-top:8px}
+a.home{display:inline-block;margin-top:20px;font-weight:900;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="chip">🎄 Slow Christmas 2026</span>
+  <div id="ask">
+    <h1>참가비 <em>5,000원</em>,<br>어떻게 낼 거예요?</h1>
+    <p class="sub">하나만 눌러 주세요. 바로 우리한테 전달돼요.</p>
+    <button class="btn b1" id="cash" type="button">🙋 파티 날 현장에서 낼게요</button>
+    <button class="btn b2" id="sent" type="button">✅ 이미 보냈어요</button>
+    <div class="box">
+      <b>💳 지금 계좌로 보낼래요</b>
+      <p class="acct">우리은행 1005-704-966197<small>받는 사람: 주식회사 슬로코치<br>보내는 사람 이름: 신청한 이름 + 휴대폰 뒷4자리</small></p>
+      <button class="btn b3" id="copy" type="button">📋 계좌번호 복사하기</button>
+    </div>
+    <p class="msg" id="msg" role="status"></p>
+  </div>
+  <div class="done" id="done">
+    <div class="big" id="doneIcon">🎉</div>
+    <h2 id="doneTitle">알려 줘서 고마워요!</h2>
+    <p id="doneText"></p>
+    <a class="home" href="/">← 초대장 다시 보기</a>
+  </div>
+</div>
+<script src="pay.js"></script>
+</body>
+</html>
