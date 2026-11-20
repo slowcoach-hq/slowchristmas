@@ -105,9 +105,9 @@ async function submit(){ if(submitting)return; submitting=true; clearTimeout(adv
   clearTimeout(to);
   if(j&&j.ok){
     err.textContent="";
-    document.getElementById("payName").textContent=d.name+d.phone.replace(/\D/g,"").slice(-4);
+    document.getElementById("payName").textContent=d.name;
     if(j.wait){ document.getElementById("payBox").style.display="none"; document.getElementById("cashBox").style.display="none"; document.getElementById("waitBox").style.display="block"; document.getElementById("doneTitle").textContent="대기 신청 끝!"; document.getElementById("doneSub").textContent="자리가 나면 연락드릴게요."; document.getElementById("doneMsg").textContent="고마워요! 🎄"; }
-    else if(d.pay==="proxy"){ const p=document.createElement("p"); p.style.cssText="margin-top:6px;font-size:14px"; p.textContent="대신 보내 주는 분께 이 계좌와 보내는 사람 이름을 꼭 알려 주세요."; document.getElementById("payBox").appendChild(p); }
+    else if(d.pay==="proxy"){ const p=document.createElement("p"); p.style.cssText="margin-top:6px;font-size:14px"; p.textContent="대신 보내 주는 분께 이 계좌를 알려 주고, '받는 분 통장 표시'에 내 이름을 써 달라고 해 주세요."; document.getElementById("payBox").appendChild(p); }
     if(!j.wait&&d.pay==="cash"){ document.getElementById("payBox").style.display="none"; document.getElementById("doneTitle").textContent="신청 끝!"; document.getElementById("doneSub").textContent="참가비는 파티 날 현금으로 내면 돼요."; document.getElementById("cashBox").style.display="block"; document.getElementById("doneMsg").textContent="신청이 끝났어요! 12월 초에 문자로 다시 알려 드릴게요. 12월 24일에 만나요! 🎄"; }
     form.style.display="none";document.getElementById("done").style.display="block";
     document.getElementById("apply").scrollIntoView({behavior:"smooth"});confetti(170);
