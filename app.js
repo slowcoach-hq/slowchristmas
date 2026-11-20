@@ -94,7 +94,7 @@ function collect(){return{rid,ms:Date.now()-t0,tp:form.tp.value,name:form.uname.
   wish:sel("wish"),wishText:form.wishText.value.trim(),likes:form.likes.value.trim(),food:foodVal(),
   help:form.help.value.trim(),photo:sel("photo")[0]==="yes",agree:form.agree.checked===true,health:needHealth()?form.healthOk.checked===true:false,pay:sel("pay")[0]||"",share:form.share.checked===true};}
 function renderSummary(){const d=collect();const box=document.getElementById("summary");box.textContent="";
-  [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish.join(", "),d.wishText].filter(Boolean).join(" / ")],["참가비",{self:"내가 계좌로",proxy:"가족·선생님이 대신 계좌로",cash:"파티 날 현금"}[d.pay]],["사진·홍보",d.photo?"동의":"사진에서 빼 주세요"]].forEach(([a,b])=>{const div=document.createElement("div");div.append("✔ "+a+": ");const bb=document.createElement("b");bb.textContent=b||"-";div.append(bb);box.append(div);});
+  [["이름",d.name],["태어난 해",d.birth],["휴대폰",d.phone],["하고 싶은 것",[d.wish.join(", "),d.wishText].filter(Boolean).join(" / ")],["참가비",{self:"계좌로",proxy:"가족·선생님이 대신 계좌로",cash:"파티 날 현금"}[d.pay]],["사진·홍보",d.photo?"동의":"사진에서 빼 주세요"]].forEach(([a,b])=>{const div=document.createElement("div");div.append("✔ "+a+": ");const bb=document.createElement("b");bb.textContent=b||"-";div.append(bb);box.append(div);});
   document.getElementById("healthBox").style.display=needHealth()?"block":"none";}
 const ERR={INVALID_BIRTH:"태어난 해를 다시 확인해 주세요.",INVALID_PHONE:"휴대폰 번호를 다시 확인해 주세요.",INVALID_CONSENT:"동의 칸을 다시 확인해 주세요.",BUSY:"지금 신청이 몰렸어요. 1분 뒤에 다시 눌러 주세요.",CLOSED:"신청이 마감됐어요. 고마워요!",BOT:"조금 천천히 다시 눌러 주세요.",TOO_LARGE:"글이 너무 길어요. 조금 줄여 주세요."};
 function lockForm(on){ form.querySelectorAll("button,input,textarea").forEach(x=>{ if(x.id!=="next") x.disabled=on; }); }
